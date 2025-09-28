@@ -1,6 +1,5 @@
 // Attendre que le DOM soit chargé
 document.addEventListener('DOMContentLoaded', function() {
-    
     // Variables globales
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
@@ -336,6 +335,68 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Gestion des tooltips interactifs
+    function initSkillTooltips() {
+        const interactiveSkills = document.querySelectorAll('.interactive-skill');
+        
+        interactiveSkills.forEach(skill => {
+            const tooltip = skill.querySelector('.skill-tooltip');
+            
+            if (tooltip) {
+                // Gestion du hover pour desktop
+                skill.addEventListener('mouseenter', function() {
+                    tooltip.style.opacity = '1';
+                    tooltip.style.visibility = 'visible';
+                    tooltip.style.transform = 'translateY(0)';
+                });
+                
+                skill.addEventListener('mouseleave', function() {
+                    tooltip.style.opacity = '0';
+                    tooltip.style.visibility = 'hidden';
+                    tooltip.style.transform = 'translateY(10px)';
+                });
+                
+                // Gestion du clic pour mobile
+                skill.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Fermer tous les autres tooltips
+                    interactiveSkills.forEach(otherSkill => {
+                        if (otherSkill !== skill) {
+                            const otherTooltip = otherSkill.querySelector('.skill-tooltip');
+                            if (otherTooltip) {
+                                otherTooltip.style.opacity = '0';
+                                otherTooltip.style.visibility = 'hidden';
+                                otherTooltip.style.transform = 'translateY(10px)';
+                            }
+                        }
+                    });
+                    
+                    // Toggle le tooltip actuel
+                    const isVisible = tooltip.style.opacity === '1';
+                    if (isVisible) {
+                        tooltip.style.opacity = '0';
+                        tooltip.style.visibility = 'hidden';
+                        tooltip.style.transform = 'translateY(10px)';
+                    } else {
+                        tooltip.style.opacity = '1';
+                        tooltip.style.visibility = 'visible';
+                        tooltip.style.transform = 'translateY(0)';
+                    }
+                });
+                
+                // Fermer les tooltips en cliquant ailleurs
+                document.addEventListener('click', function(e) {
+                    if (!skill.contains(e.target)) {
+                        tooltip.style.opacity = '0';
+                        tooltip.style.visibility = 'hidden';
+                        tooltip.style.transform = 'translateY(10px)';
+                    }
+                });
+            }
+        });
+    }
+
     // Animation parallax légère pour le hero
     function initParallaxEffect() {
         const hero = document.querySelector('.hero');
@@ -393,6 +454,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initCounterAnimation();
         initContactForm();
         initSkillsAnimation();
+        initSkillTooltips();
         initParallaxEffect();
         initParticleEffect();
         
