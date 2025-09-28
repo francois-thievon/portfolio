@@ -345,52 +345,45 @@ document.addEventListener('DOMContentLoaded', function() {
             if (tooltip) {
                 // Gestion du hover pour desktop
                 skill.addEventListener('mouseenter', function() {
-                    tooltip.style.opacity = '1';
-                    tooltip.style.visibility = 'visible';
-                    tooltip.style.transform = 'translateY(0)';
+                    if (window.innerWidth > 768) {
+                        tooltip.classList.add('show');
+                    }
                 });
                 
                 skill.addEventListener('mouseleave', function() {
-                    tooltip.style.opacity = '0';
-                    tooltip.style.visibility = 'hidden';
-                    tooltip.style.transform = 'translateY(10px)';
+                    if (window.innerWidth > 768) {
+                        tooltip.classList.remove('show');
+                    }
                 });
                 
-                // Gestion du clic pour mobile
+                // Gestion du clic pour mobile ET desktop (pour forcer l'affichage)
                 skill.addEventListener('click', function(e) {
                     e.preventDefault();
+                    e.stopPropagation();
                     
                     // Fermer tous les autres tooltips
                     interactiveSkills.forEach(otherSkill => {
                         if (otherSkill !== skill) {
                             const otherTooltip = otherSkill.querySelector('.skill-tooltip');
                             if (otherTooltip) {
-                                otherTooltip.style.opacity = '0';
-                                otherTooltip.style.visibility = 'hidden';
-                                otherTooltip.style.transform = 'translateY(10px)';
+                                otherTooltip.classList.remove('show');
                             }
                         }
                     });
                     
                     // Toggle le tooltip actuel
-                    const isVisible = tooltip.style.opacity === '1';
-                    if (isVisible) {
-                        tooltip.style.opacity = '0';
-                        tooltip.style.visibility = 'hidden';
-                        tooltip.style.transform = 'translateY(10px)';
-                    } else {
-                        tooltip.style.opacity = '1';
-                        tooltip.style.visibility = 'visible';
-                        tooltip.style.transform = 'translateY(0)';
-                    }
+                    tooltip.classList.toggle('show');
                 });
-                
-                // Fermer les tooltips en cliquant ailleurs
-                document.addEventListener('click', function(e) {
-                    if (!skill.contains(e.target)) {
-                        tooltip.style.opacity = '0';
-                        tooltip.style.visibility = 'hidden';
-                        tooltip.style.transform = 'translateY(10px)';
+            }
+        });
+        
+        // Fermer les tooltips en cliquant ailleurs
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.interactive-skill')) {
+                interactiveSkills.forEach(skill => {
+                    const tooltip = skill.querySelector('.skill-tooltip');
+                    if (tooltip) {
+                        tooltip.classList.remove('show');
                     }
                 });
             }

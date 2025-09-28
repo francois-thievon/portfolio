@@ -441,7 +441,7 @@ section {
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(10px);
     background: var(--white);
     border: 2px solid var(--primary-color);
     border-radius: 10px;
@@ -453,12 +453,14 @@ section {
     transition: all 0.3s ease;
     z-index: 9999;
     margin-top: 10px;
+    pointer-events: auto;
 }
 
-.interactive-skill:hover .skill-tooltip {
+/* Classe pour les tooltips visibles (contrôlée par JavaScript) */
+.interactive-skill .skill-tooltip.show {
     opacity: 1;
     visibility: visible;
-    pointer-events: none;
+    transform: translateX(-50%) translateY(0);
 }
 
 .skill-tooltip ul {
