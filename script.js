@@ -1,5 +1,6 @@
 // Attendre que le DOM soit chargé
 document.addEventListener('DOMContentLoaded', function() {
+    
     // Variables globales
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
