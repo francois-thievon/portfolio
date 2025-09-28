@@ -351,16 +351,33 @@ section {
 /* Skills Section */
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, minmax(380px, 1fr));
     gap: 2rem;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+@media (max-width: 1200px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 800px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .skill-category {
     background: var(--white);
-    padding: 2rem;
+    padding: 3rem;
     border-radius: 20px;
     box-shadow: var(--shadow);
     transition: transform 0.3s ease;
+    width: 100%;
+    min-height: 320px;
 }
 
 .skill-category:hover {
@@ -377,18 +394,21 @@ section {
 
 .skill-items {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
 }
 
 .skill-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
+    justify-content: center;
+    padding: 1.5rem 2rem;
     background: var(--bg-light);
-    border-radius: 15px;
+    border-radius: 12px;
     transition: all 0.3s ease;
+    min-height: 120px;
+    width: 100%;
 }
 
 .skill-item:hover {
@@ -398,13 +418,105 @@ section {
 }
 
 .skill-item i {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+    margin-bottom: 0.4rem;
 }
 
 .skill-item span {
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    text-align: center;
+    width: 100%;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Interactive Skills */
+.interactive-skill {
+    position: relative;
+    cursor: pointer;
+}
+
+.interactive-skill .skill-tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--white);
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 1rem;
+    min-width: 160px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 9999;
+    margin-top: 10px;
+}
+
+.interactive-skill:hover .skill-tooltip {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: none;
+}
+
+.skill-tooltip ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.skill-tooltip li {
+    padding: 0.3rem 0;
+    color: var(--text-dark);
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--bg-light);
+    transition: color 0.2s ease;
+}
+
+.skill-tooltip li:last-child {
+    border-bottom: none;
+}
+
+.skill-tooltip li:hover {
+    color: var(--primary-color);
+}
+
+/* Flèche du tooltip - toujours en dessous */
+.skill-tooltip::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid var(--primary-color);
+}
+
+/* Amélioration du z-index pour éviter les superpositions */
+.interactive-skill:hover {
+    z-index: 10000;
+    position: relative;
+}
+
+/* S'assurer que les conteneurs parents n'interfèrent pas */
+.skill-category {
+    position: relative;
+    z-index: 1;
+}
+
+.skill-category:hover {
+    z-index: 2;
+}
+
+.skills-grid {
+    position: relative;
+    z-index: 1;
 }
 
 /* Projects Section */
