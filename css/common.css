@@ -183,7 +183,7 @@ p {
 /* Header sticky pour les pages secondaires */
 .secondary-page .page-hero {
     position: sticky;
-    top: 80px; /* Juste sous la navigation */
+    top: 100px; /* Exactement la hauteur de la navigation pour suppression totale de l'écart */
     z-index: 100;
     min-height: 60vh;
     transition: none; /* Pas de transition CSS, géré par JS */
