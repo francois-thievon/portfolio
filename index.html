@@ -16,12 +16,12 @@
         }
 
         .hero-title {
-            font-size: 4rem;
+            font-size: 3.2rem; /* Réduit de 4rem à 3.2rem pour tenir sur 2 lignes */
             font-weight: 400; /* Poids normal par défaut */
             margin-bottom: 1rem;
             color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            line-height: 1.1;
+            line-height: 1.2; /* Augmenté légèrement de 1.1 à 1.2 */
         }
 
         .hero-subtitle {
@@ -77,6 +77,39 @@
             color: #ffffff;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 
                          0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Photo de profil */
+        .hero-container {
+            display: flex;
+            align-items: center;
+            gap: 4rem; /* Augmenté de 3rem à 4rem pour plus d'espace */
+            max-width: 1600px; /* Augmenté de 1400px à 1600px */
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .profile-photo {
+            width: 300px; /* Remis à 300px comme demandé */
+            height: 300px; /* Remis à 300px */
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: profileFloat 6s ease-in-out infinite;
+            flex-shrink: 0; /* Empêche la photo de se réduire */
+        }
+
+        @keyframes profileFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-text-content {
+            flex: 1;
+            text-align: left;
+            min-width: 600px; /* Largeur minimale pour le texte */
+            max-width: 800px; /* Largeur maximale pour éviter que ça s'étale trop */
         }
 
         .main-content {
@@ -357,6 +390,21 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .hero-container {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .profile-photo {
+                width: 200px;
+                height: 200px;
+            }
+
+            .hero-text-content {
+                text-align: center;
+            }
+
             .hero-title {
                 font-size: 2.5rem;
             }
@@ -397,6 +445,15 @@
         }
 
         @media (max-width: 480px) {
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .hero-container {
+                gap: 1.5rem;
+            }
+
             .hero-title {
                 font-size: 2rem;
             }
@@ -482,17 +539,22 @@
                 <span></span>
             </div>
             <div class="page-hero-content">
-                <h1 class="hero-title">
-                    <span id="typewriter-text"></span>
-                    <span class="cursor">|</span>
-                </h1>
-                <p class="hero-subtitle">Ingénieur Data Science & Machine Learning</p>
-                <p class="hero-description">
-                    Je transforme les données en insights actionables et développe des solutions d'intelligence artificielle pour résoudre des problèmes complexes.
-                </p>
-                <div class="hero-buttons">
-                    <a href="projects.html" class="btn btn-primary">Voir mes projets</a>
-                    <a href="contact.html" class="btn btn-secondary">Me contacter</a>
+                <div class="hero-container">
+                    <img src="assets/PhotoProfil.jpg" alt="François Thievon" class="profile-photo">
+                    <div class="hero-text-content">
+                        <h1 class="hero-title">
+                            <span id="typewriter-text"></span>
+                            <span class="cursor">|</span>
+                        </h1>
+                        <p class="hero-subtitle">Ingénieur spécialisé dans les Maths et la Data Science</p>
+                        <p class="hero-description">
+                            J'adore le bras de fer et j'ai pour projet de battre Levan Saginashvili un jour.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="projects.html" class="btn btn-primary">Voir mes projets</a>
+                            <a href="contact.html" class="btn btn-secondary">Me contacter</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
