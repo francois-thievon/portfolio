@@ -32,6 +32,7 @@
 .nav-logo {
     margin-right: auto; /* Pousse le logo vers la gauche */
     margin-left: -10px; /* Léger décalage maintenant qu'on a plus d'espace */
+    margin-right: 2rem; /* Espace entre Portfolio et le bouton Accueil */
 }
 
 .nav-logo h3 {
@@ -80,6 +81,7 @@
     display: flex;
     gap: 1rem;
     align-items: center;
+    margin-left: 2rem; /* Espace entre le menu navigation et les boutons sociaux */
 }
 
 .social-link {
