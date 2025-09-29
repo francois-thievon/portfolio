@@ -17,7 +17,7 @@
 
         .hero-title {
             font-size: 4rem;
-            font-weight: 800;
+            font-weight: 400; /* Poids normal par défaut */
             margin-bottom: 1rem;
             color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
@@ -53,6 +53,30 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: 900;
+        }
+
+        /* Animation de machine à écrire */
+        .cursor {
+            font-weight: 100;
+            color: white;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Styles pour l'animation typewriter */
+        .normal-text {
+            font-weight: 500; /* Medium pour "Bonjour, je suis" */
+        }
+
+        .name-text {
+            font-weight: 700; /* Réduit de 800 à 700 pour "François Thievon" */
+            color: #ffffff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 
+                         0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         .main-content {
@@ -458,7 +482,10 @@
                 <span></span>
             </div>
             <div class="page-hero-content">
-                <h1 class="hero-title">Bonjour, je suis <span class="highlight">François Thievon</span></h1>
+                <h1 class="hero-title">
+                    <span id="typewriter-text"></span>
+                    <span class="cursor">|</span>
+                </h1>
                 <p class="hero-subtitle">Ingénieur Data Science & Machine Learning</p>
                 <p class="hero-description">
                     Je transforme les données en insights actionables et développe des solutions d'intelligence artificielle pour résoudre des problèmes complexes.
@@ -574,5 +601,50 @@
     <script src="js/navigation.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/animation-sync.js"></script>
+    
+    <script>
+        // Animation de machine à écrire
+        document.addEventListener('DOMContentLoaded', function() {
+            const normalText = "Bonjour, je suis ";
+            const nameText = "François Thievon";
+            const typewriterElement = document.getElementById('typewriter-text');
+            const cursor = document.querySelector('.cursor');
+            let currentText = "";
+            let isTypingName = false;
+
+            function typeText(text, className, callback) {
+                let i = 0;
+                function type() {
+                    if (i < text.length) {
+                        currentText += text.charAt(i);
+                        if (className) {
+                            typewriterElement.innerHTML = `<span class="normal-text">${normalText}</span><span class="${className}">${currentText.substring(normalText.length)}</span>`;
+                        } else {
+                            typewriterElement.innerHTML = `<span class="normal-text">${currentText}</span>`;
+                        }
+                        i++;
+                        setTimeout(type, 100);
+                    } else if (callback) {
+                        callback();
+                    }
+                }
+                type();
+            }
+
+            // Commencer l'animation après un délai
+            setTimeout(() => {
+                // D'abord taper "Bonjour, je suis "
+                typeText(normalText, null, () => {
+                    // Ensuite taper "François Thievon"
+                    typeText(nameText, 'name-text', () => {
+                        // Masquer le curseur après 2 secondes
+                        setTimeout(() => {
+                            cursor.style.display = 'none';
+                        }, 2000);
+                    });
+                });
+            }, 1000);
+        });
+    </script>
 </body>
 </html>
