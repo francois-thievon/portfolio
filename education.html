@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éducation - François Thievon | Data Scientist</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Styles spécifiques à la page Éducation */
+        .main-content {
+            padding-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Education Hero Section */
+        .education-hero {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .education-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-animated-education);
+            background-size: 800% 800%;
+            animation: academicFlow 20s linear infinite;
+            z-index: 1;
+        }
+
+        .education-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            animation: overlayPulse 3s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        @keyframes academicFlow {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .education-hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .education-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .education-hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        }
+
+        .timeline-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: var(--gradient-primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            padding: 2rem 0;
+            position: relative;
+            width: 50%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -15px;
+            width: 0;
+            height: 0;
+            border: 15px solid;
+            border-color: transparent transparent transparent white;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -15px;
+            width: 0;
+            height: 0;
+            border: 15px solid;
+            border-color: transparent white transparent transparent;
+            transform: translateY(-50%);
+        }
+
+        .timeline-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-date {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .timeline-title {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-institution {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-achievements {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-achievements li {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-achievements li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        /* Certifications Section */
+        .certifications-section {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .certification-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .certification-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .cert-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .cert-title {
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-issuer {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .cert-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-badge {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Skills Progress Section */
+        .skills-progress-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .skill-item {
+            text-align: center;
+        }
+
+        .skill-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .skill-progress {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress-bar {
+            height: 100%;
+            background: var(--gradient-accent);
+            width: 0%;
+            transition: width 2s ease-in-out;
+            border-radius: 4px;
+        }
+
+        .skill-percentage {
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .education-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .education-hero p {
+                font-size: 1.1rem;
+            }
+
+            .timeline::after {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 60px;
+            }
+
+            .timeline-item .timeline-content::after {
+                display: none;
+            }
+
+            .timeline-icon {
+                left: 20px;
+                transform: translateY(-50%);
+            }
+
+            .certifications-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .education-hero h1 {
+                font-size: 2rem;
+            }
+
+            .timeline-item {
+                padding-left: 40px;
+            }
+
+            .timeline-icon {
+                left: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .timeline-content {
+                padding: 1.5rem;
+            }
+
+            .certification-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h3>Portfolio</h3>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">À propos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="skills.html" class="nav-link">Compétences</a>
+                </li>
+                <li class="nav-item">
+                    <a href="projects.html" class="nav-link">Projets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="education.html" class="nav-link current-page">Éducation</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://github.com/francois-thievon" target="_blank" class="social-link" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/francois-thievon-19b8692a1/" target="_blank" class="social-link" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Education Hero Section -->
+        <section class="page-hero">
+            <div class="floating-shapes">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="floating-bubbles">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="page-hero-content">
+                <h1>Mon Parcours Académique</h1>
+                <p>
+                    Une formation solide en data science et intelligence artificielle, 
+                    complétée par des certifications professionnelles et un apprentissage continu.
+                </p>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section class="timeline-section">
+            <div class="timeline-container">
+                <div class="section-title">
+                    <h2>Parcours Éducatif</h2>
+                    <p>De la formation initiale aux spécialisations avancées</p>
+                </div>
+
+                <div class="timeline">
+                    <!-- Timeline Item 1 -->
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">2023 - 2024</div>
+                            <h3 class="timeline-title">Master en Data Science & IA</h3>
+                            <div class="timeline-institution">École Supérieure d'Informatique</div>
+                            <p class="timeline-description">
+                                Formation complète en science des données avec spécialisation en intelligence artificielle et machine learning.
+                            </p>
+                            <ul class="timeline-achievements">
+                                <li>Mention Très Bien (17.2/20)</li>
+                                <li>Projet de fin d'études sur le NLP médical</li>
+                                <li>Stage chez TechCorp - 6 mois</li>
+                                <li>Publication dans une conférence internationale</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 2 -->
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">2021 - 2023</div>
+                            <h3 class="timeline-title">Licence Informatique</h3>
+                            <div class="timeline-institution">Université de Sciences</div>
+                            <p class="timeline-description">
+                                Bases solides en programmation, algorithmique, mathématiques et statistiques appliquées.
+                            </p>
+                            <ul class="timeline-achievements">
+                                <li>Major de promotion (16.8/20)</li>
+                                <li>Président de l'association étudiante tech</li>
+                                <li>Hackathon IA - 1ère place</li>
+                                <li>Projet open source avec 500+ stars GitHub</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 3 -->
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">2019 - 2021</div>
+                            <h3 class="timeline-title">DUT Statistiques et Informatique</h3>
+                            <div class="timeline-institution">IUT Technology</div>
+                            <p class="timeline-description">
+                                Formation technique en analyse de données, programmation et méthodes statistiques.
+                            </p>
+                            <ul class="timeline-achievements">
+                                <li>Diplôme avec félicitations</li>
+                                <li>Stage en entreprise - Analyse de données client</li>
+                                <li>Projet tutoré sur la visualisation de données</li>
+                                <li>Certification TOEIC - 920/990</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 4 -->
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">2017 - 2019</div>
+                            <h3 class="timeline-title">Baccalauréat Scientifique</h3>
+                            <div class="timeline-institution">Lycée Excellence</div>
+                            <p class="timeline-description">
+                                Spécialité Mathématiques et Sciences de l'Ingénieur avec option Informatique.
+                            </p>
+                            <ul class="timeline-achievements">
+                                <li>Mention Très Bien (17.5/20)</li>
+                                <li>Prix d'excellence en Mathématiques</li>
+                                <li>Olympiades de Mathématiques - Finaliste</li>
+                                <li>Club programmation - Responsable</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section class="certifications-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Certifications Professionnelles</h2>
+                    <p>Expertise reconnue par les leaders de l'industrie</p>
+                </div>
+
+                <div class="certifications-grid">
+                    <div class="certification-card fade-in">
+                        <div class="cert-icon">
+                            <i class="fab fa-aws"></i>
+                        </div>
+                        <h3 class="cert-title">AWS Certified Solutions Architect</h3>
+                        <div class="cert-issuer">Amazon Web Services</div>
+                        <div class="cert-date">Obtenue : Mars 2024</div>
+                        <span class="cert-badge">Professional</span>
+                    </div>
+
+                    <div class="certification-card fade-in">
+                        <div class="cert-icon">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <h3 class="cert-title">Google Cloud Professional ML Engineer</h3>
+                        <div class="cert-issuer">Google Cloud</div>
+                        <div class="cert-date">Obtenue : Janvier 2024</div>
+                        <span class="cert-badge">Professional</span>
+                    </div>
+
+                    <div class="certification-card fade-in">
+                        <div class="cert-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="cert-title">TensorFlow Developer Certificate</h3>
+                        <div class="cert-issuer">TensorFlow</div>
+                        <div class="cert-date">Obtenue : Octobre 2023</div>
+                        <span class="cert-badge">Developer</span>
+                    </div>
+
+                    <div class="certification-card fade-in">
+                        <div class="cert-icon">
+                            <i class="fab fa-microsoft"></i>
+                        </div>
+                        <h3 class="cert-title">Azure Data Scientist Associate</h3>
+                        <div class="cert-issuer">Microsoft</div>
+                        <div class="cert-date">Obtenue : Septembre 2023</div>
+                        <span class="cert-badge">Associate</span>
+                    </div>
+
+                    <div class="certification-card fade-in">
+                        <div class="cert-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="cert-title">Tableau Desktop Specialist</h3>
+                        <div class="cert-issuer">Tableau</div>
+                        <div class="cert-date">Obtenue : Juillet 2023</div>
+                        <span class="cert-badge">Specialist</span>
+                    </div>
+
+                    <div class="certification-card fade-in">
+                        <div class="cert-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <h3 class="cert-title">Python Institute PCPP1</h3>
+                        <div class="cert-issuer">Python Institute</div>
+                        <div class="cert-date">Obtenue : Mai 2023</div>
+                        <span class="cert-badge">Professional</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Progress Section -->
+        <section class="skills-progress-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Progression des Compétences</h2>
+                    <p>Évolution continue de l'expertise technique</p>
+                </div>
+
+                <div class="skills-grid">
+                    <div class="skill-item fade-in">
+                        <div class="skill-name">Machine Learning</div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-progress="95"></div>
+                        </div>
+                        <div class="skill-percentage">95%</div>
+                    </div>
+
+                    <div class="skill-item fade-in">
+                        <div class="skill-name">Deep Learning</div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-progress="90"></div>
+                        </div>
+                        <div class="skill-percentage">90%</div>
+                    </div>
+
+                    <div class="skill-item fade-in">
+                        <div class="skill-name">Python / R</div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-progress="98"></div>
+                        </div>
+                        <div class="skill-percentage">98%</div>
+                    </div>
+
+                    <div class="skill-item fade-in">
+                        <div class="skill-name">Cloud Computing</div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-progress="85"></div>
+                        </div>
+                        <div class="skill-percentage">85%</div>
+                    </div>
+
+                    <div class="skill-item fade-in">
+                        <div class="skill-name">Data Visualization</div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-progress="92"></div>
+                        </div>
+                        <div class="skill-percentage">92%</div>
+                    </div>
+
+                    <div class="skill-item fade-in">
+                        <div class="skill-name">Big Data</div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-progress="88"></div>
+                        </div>
+                        <div class="skill-percentage">88%</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 François Thievon. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/animation-sync.js"></script>
+    <script>
+        // Animation des barres de progression
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.skill-progress-bar');
+            
+            // Observer pour animer les barres de progression
+            const progressObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const progressBar = entry.target;
+                        const progress = progressBar.getAttribute('data-progress');
+                        
+                        setTimeout(() => {
+                            progressBar.style.width = progress + '%';
+                        }, 500);
+                        
+                        progressObserver.unobserve(progressBar);
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            progressBars.forEach(bar => {
+                progressObserver.observe(bar);
+            });
+
+            // Animation de la timeline
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            const timelineObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('fade-in');
+                        }, index * 200);
+                        timelineObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.3
+            });
+
+            timelineItems.forEach(item => {
+                timelineObserver.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>

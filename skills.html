@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compétences - François Thievon | Data Scientist</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Styles spécifiques à la page Compétences */
+        .main-content {
+            padding-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Skills Hero Section */
+        .skills-hero {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .skills-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-animated-skills);
+            background-size: 300% 300%;
+            animation: radialZoom 10s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .skills-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.2);
+            animation: overlayPulse 4s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        .skills-hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .skills-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .skills-hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Skills Content Section */
+        .skills-content {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .skill-category {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill-category:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-category h3 {
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .skill-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            background: #f8fafc;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            text-align: center;
+        }
+
+        .skill-item:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .skill-item i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item span {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Interactive Skills avec Tooltips */
+        .interactive-skill {
+            position: relative;
+        }
+
+        .skill-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text-dark);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            min-width: 200px;
+            max-width: 280px;
+            margin-bottom: 10px;
+        }
+
+        .skill-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: var(--text-dark);
+        }
+
+        .skill-tooltip.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .skill-tooltip ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .skill-tooltip li {
+            padding: 0.3rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+        }
+
+        .skill-tooltip li:last-child {
+            border-bottom: none;
+        }
+
+        .skill-tooltip li::before {
+            content: '✓';
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Responsive Tooltips */
+        @media (max-width: 768px) {
+            .skill-tooltip {
+                position: fixed;
+                bottom: auto;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                max-width: 90vw;
+                width: auto;
+            }
+
+            .skill-tooltip::after {
+                display: none;
+            }
+        }
+
+        /* Expertise Levels */
+        .expertise-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .expertise-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .expertise-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .expertise-level {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .star {
+            width: 20px;
+            height: 20px;
+            background: #e2e8f0;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            transition: all 0.3s ease;
+        }
+
+        .star.filled {
+            background: var(--primary-color);
+        }
+
+        /* Certifications Section */
+        .certifications-section {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .certification-card {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .certification-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .cert-logo {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .cert-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-issuer {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .skills-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .skills-hero p {
+                font-size: 1.1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .skill-category {
+                padding: 2rem;
+            }
+
+            .skill-items {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 0.8rem;
+            }
+
+            .skill-item {
+                padding: 1rem 0.5rem;
+            }
+
+            .skill-item i {
+                font-size: 1.5rem;
+            }
+
+            .skill-item span {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .skills-hero h1 {
+                font-size: 2rem;
+            }
+
+            .skill-category {
+                padding: 1.5rem;
+            }
+
+            .skill-items {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h3>Portfolio</h3>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">À propos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="skills.html" class="nav-link current-page">Compétences</a>
+                </li>
+                <li class="nav-item">
+                    <a href="projects.html" class="nav-link">Projets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="education.html" class="nav-link">Éducation</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://github.com/francois-thievon" target="_blank" class="social-link" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/francois-thievon-19b8692a1/" target="_blank" class="social-link" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Skills Hero Section -->
+        <section class="page-hero">
+            <div class="floating-shapes">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="floating-bubbles">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="page-hero-content">
+                <h1>Mes Compétences</h1>
+                <p>
+                    Découvrez mon expertise technique en data science, machine learning et développement. 
+                    Cliquez sur les compétences pour voir les détails !
+                </p>
+            </div>
+        </section>
+
+        <!-- Skills Content Section -->
+        <section class="skills-content">
+            <div class="skills-grid">
+                <!-- Langages Informatiques -->
+                <div class="skill-category fade-in">
+                    <h3>Langages Informatiques</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fab fa-python"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-r-project"></i>
+                            <span>R</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-database"></i>
+                            <span>SQL</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-cuttlefish"></i>
+                            <span>C++</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-terminal"></i>
+                            <span>Bash</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-java"></i>
+                            <span>Java</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>Dart</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-calculator"></i>
+                            <span>Matlab</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Machine Learning -->
+                <div class="skill-category fade-in">
+                    <h3>Machine Learning</h3>
+                    <div class="skill-items">
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-brain"></i>
+                            <span>Librairies</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>Scikit-learn</li>
+                                    <li>XGBoost</li>
+                                    <li>LightGBM</li>
+                                    <li>CatBoost</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Régression</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>Régression linéaire</li>
+                                    <li>Régression logistique</li>
+                                    <li>Ridge & Lasso</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-sitemap"></i>
+                            <span>Classification</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>k-NN</li>
+                                    <li>SVM</li>
+                                    <li>Random Forest</li>
+                                    <li>Gradient Boosting</li>
+                                    <li>Bagging</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>Clustering</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>K-Means</li>
+                                    <li>K-Medoids</li>
+                                    <li>Clustering hiérarchique</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-compress-arrows-alt"></i>
+                            <span>Réduction Dimension</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>PCA</li>
+                                    <li>MCA</li>
+                                    <li>SVD</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-cogs"></i>
+                            <span>Optimisation</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>Grid Search</li>
+                                    <li>Random Search</li>
+                                    <li>Optuna</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deep Learning -->
+                <div class="skill-category fade-in">
+                    <h3>Deep Learning</h3>
+                    <div class="skill-items">
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-network-wired"></i>
+                            <span>Frameworks</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>TensorFlow</li>
+                                    <li>Keras</li>
+                                    <li>PyTorch</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-brain"></i>
+                            <span>Réseaux de Neurones</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>Réseaux de Neurones</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-brain"></i>
+                            <span>Applications</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>NLP</li>
+                                    <li>Computer Vision</li>
+                                    <li>Time Series</li>
+                                    <li>Transformers</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Manipulation -->
+                <div class="skill-category fade-in">
+                    <h3>Data Manipulation</h3>
+                    <div class="skill-items">
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-table"></i>
+                            <span>Pandas</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>DataFrame</li>
+                                    <li>Data Cleaning</li>
+                                    <li>Groupby Operations</li>
+                                    <li>Merge & Join</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-superscript"></i>
+                            <span>NumPy</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>N-dimensional Arrays</li>
+                                    <li>Linear Algebra</li>
+                                    <li>Broadcasting</li>
+                                    <li>Statistical Functions</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-wrench"></i>
+                            <span>Feature Engineering</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>Feature Scaling</li>
+                                    <li>Categorical Encoding</li>
+                                    <li>Feature Selection</li>
+                                    <li>Feature Creation</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-broom"></i>
+                            <span>Data Cleaning</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>Missing Data Handling</li>
+                                    <li>Outlier Detection</li>
+                                    <li>Data Transformation</li>
+                                    <li>ETL Pipelines</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Visualization -->
+                <div class="skill-category fade-in">
+                    <h3>Data Visualization</h3>
+                    <div class="skill-items">
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Power BI</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>Interactive Dashboards</li>
+                                    <li>Business Reports</li>
+                                    <li>KPI Monitoring</li>
+                                    <li>Data Modeling</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-chart-area"></i>
+                            <span>Matplotlib</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>Static Plots</li>
+                                    <li>Subplots</li>
+                                    <li>Customization</li>
+                                    <li>Export Formats</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-palette"></i>
+                            <span>Seaborn</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>Statistical Plots</li>
+                                    <li>Correlation Heatmaps</li>
+                                    <li>Distribution Plots</li>
+                                    <li>Pair Plots</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-chart-pie"></i>
+                            <span>Plotly</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>Interactive Charts</li>
+                                    <li>3D Visualizations</li>
+                                    <li>Dash Dashboards</li>
+                                    <li>Animations</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fab fa-r-project"></i>
+                            <span>ggplot2</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>Grammar of Graphics</li>
+                                    <li>Layered Approach</li>
+                                    <li>Aesthetic Mappings</li>
+                                    <li>Faceting</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Analysis -->
+                <div class="skill-category fade-in">
+                    <h3>Data Analysis</h3>
+                    <div class="skill-items">
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-search"></i>
+                            <span>EDA</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>Exploratory Data Analysis</li>
+                                    <li>Descriptive Statistics</li>
+                                    <li>Data Profiling</li>
+                                    <li>Pattern Discovery</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-vials"></i>
+                            <span>Tests d'Hypothèses</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>T-test</li>
+                                    <li>ANOVA</li>
+                                    <li>Chi-square (χ²)</li>
+                                    <li>Mann-Whitney</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-calculator"></i>
+                            <span>Estimateurs</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>Maximum Likelihood (MLE)</li>
+                                    <li>Maximum A Posteriori (MAP)</li>
+                                    <li>Bayesian Inference</li>
+                                    <li>Prior/Posterior</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>Réseaux Bayésiens</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>Bayesian Networks</li>
+                                    <li>Probabilistic Models</li>
+                                    <li>Causal Inference</li>
+                                    <li>Graphical Models</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Big Data & Orchestration -->
+                <div class="skill-category fade-in">
+                    <h3>Big Data & Orchestration</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fas fa-bolt"></i>
+                            <span>Apache Spark</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-stream"></i>
+                            <span>Kafka</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-wind"></i>
+                            <span>Airflow</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>MinIO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DevOps & Outils -->
+                <div class="skill-category fade-in">
+                    <h3>DevOps & Outils</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fab fa-docker"></i>
+                            <span>Docker</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-dharmachakra"></i>
+                            <span>Kubernetes</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-git-alt"></i>
+                            <span>Git</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-gitlab"></i>
+                            <span>GitLab</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-play-circle"></i>
+                            <span>CI/CD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Langues -->
+                <div class="skill-category fade-in">
+                    <h3>Langues</h3>
+                    <div class="skill-items">
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-flag-usa"></i>
+                            <span>Anglais</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>940 TOEIC</li>
+                                    <li>Niveau B2+/C1</li>
+                                    <li>Professionnel</li>
+                                    <li>Technique</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="skill-item interactive-skill">
+                            <i class="fas fa-flag"></i>
+                            <span>Espagnol</span>
+                            <div class="skill-tooltip">
+                                <ul>
+                                    <li>Niveau A2</li>
+                                    <li>Élémentaire</li>
+                                    <li>Conversation basique</li>
+                                    <li>En apprentissage</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expertise Levels Section -->
+        <section class="expertise-section">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 3rem; color: var(--text-dark);">Niveaux d'expertise</h2>
+                <div class="expertise-grid">
+                    <div class="expertise-card fade-in">
+                        <div class="expertise-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <h3>Python & Data Science</h3>
+                        <div class="expertise-level">
+                            <div class="star filled"></div>
+                            <div class="star filled"></div>
+                            <div class="star filled"></div>
+                            <div class="star filled"></div>
+                            <div class="star filled"></div>
+                        </div>
+                        <p>Expert - 5+ années d'expérience</p>
+                    </div>
+                    
+                    <div class="expertise-card fade-in">
+                        <div class="expertise-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Machine Learning</h3>
+                        <div class="expertise-level">
+                            <div class="star filled"></div>
+                            <div class="star filled"></div>
+                            <div class="star filled"></div>
+                            <div class="star filled"></div>
+                            <div class="star filled"></div>
+                        </div>
+                        <p>Expert - Spécialisation avancée</p>
+                    </div>
+                    
+                    <div class="expertise-card fade-in">
+                        <div class="expertise-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3>Data Visualization</h3>
+                        <div class="expertise-level">
+                            <div class="star filled"></div>
+                            <div class="star filled"></div>
+                            <div class="star filled"></div>
+                            <div class="star filled"></div>
+                            <div class="star"></div>
+                        </div>
+                        <p>Avancé - Dashboards complexes</p>
+                    </div>
+                    
+                    <div class="expertise-card fade-in">
+                        <div class="expertise-icon">
+                            <i class="fab fa-docker"></i>
+                        </div>
+                        <h3>DevOps & Déploiement</h3>
+                        <div class="expertise-level">
+                            <div class="star filled"></div>
+                            <div class="star filled"></div>
+                            <div class="star filled"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                        </div>
+                        <p>Intermédiaire - En développement</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section class="certifications-section">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 3rem; color: var(--text-dark);">Certifications & Formations</h2>
+                <div class="certifications-grid">
+                    <div class="certification-card fade-in">
+                        <div class="cert-logo">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="cert-name">Python Data Science</div>
+                        <div class="cert-issuer">IBM - Coursera</div>
+                    </div>
+                    
+                    <div class="certification-card fade-in">
+                        <div class="cert-logo">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="cert-name">Machine Learning</div>
+                        <div class="cert-issuer">Stanford - Coursera</div>
+                    </div>
+                    
+                    <div class="certification-card fade-in">
+                        <div class="cert-logo">
+                            <i class="fab fa-aws"></i>
+                        </div>
+                        <div class="cert-name">AWS Cloud Practitioner</div>
+                        <div class="cert-issuer">Amazon Web Services</div>
+                    </div>
+                    
+                    <div class="certification-card fade-in">
+                        <div class="cert-logo">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="cert-name">Advanced Analytics</div>
+                        <div class="cert-issuer">Google Analytics</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 François Thievon. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/skills.js"></script>
+    <script src="js/animation-sync.js"></script>
+</body>
+</html>

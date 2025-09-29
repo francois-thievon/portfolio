@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À propos - François Thievon | Data Scientist</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Styles spécifiques à la page À propos */
+        .main-content {
+            padding-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* About Hero Section */
+        .about-hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-animated-about);
+            background-size: 600% 600%;
+            animation: gentleFlow 12s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .about-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.15);
+            animation: overlayPulse 4s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        .about-hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .about-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Content Section */
+        .about-content-section {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .about-text h2 {
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .about-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-placeholder {
+            width: 350px;
+            height: 350px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: white;
+            animation: floatingBubbles 6s ease-in-out infinite;
+            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        /* Values Section */
+        .values-section {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .value-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            background: var(--gradient-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover .value-icon {
+            transform: scale(1.1) rotate(360deg);
+        }
+
+        .value-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .value-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Journey Section */
+        .journey-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .journey-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-animated-about);
+            background-size: 600% 600%;
+            animation: gentleFlow 15s ease-in-out infinite;
+            opacity: 0.05;
+            z-index: 1;
+        }
+
+        .journey-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .journey-content h2 {
+            color: var(--text-dark);
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient-primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: calc(50% - 2rem);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: 2rem;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 2rem;
+        }
+
+        .timeline-date {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 4rem 0;
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        .cta-content p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .image-placeholder {
+                width: 250px;
+                height: 250px;
+                font-size: 4rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                align-items: flex-start;
+            }
+
+            .timeline-content {
+                width: calc(100% - 3rem);
+                margin-left: 3rem !important;
+                margin-right: 0 !important;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-hero h1 {
+                font-size: 2rem;
+            }
+
+            .stat-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .value-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h3>Portfolio</h3>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link current-page">À propos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="skills.html" class="nav-link">Compétences</a>
+                </li>
+                <li class="nav-item">
+                    <a href="projects.html" class="nav-link">Projets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="education.html" class="nav-link">Éducation</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://github.com/francois-thievon" target="_blank" class="social-link" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/francois-thievon-19b8692a1/" target="_blank" class="social-link" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- About Hero Section -->
+        <section class="page-hero">
+            <div class="floating-shapes">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="floating-bubbles">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="page-hero-content">
+                <h1>À propos de moi</h1>
+                <p>
+                    Ingénieur passionné par la data science et l'intelligence artificielle, je transforme 
+                    des données complexes en insights stratégiques. Mon expertise couvre l'ensemble du 
+                    pipeline data : de la collecte et nettoyage jusqu'au déploiement de modèles ML en production.
+                </p>
+            </div>
+        </section>
+
+        <!-- About Content Section -->
+        <section class="about-content-section">
+            <div class="about-grid">
+                <div class="about-text fade-in">
+                    <h2>Ma passion pour la Data Science</h2>
+                    <p>
+                        Spécialisé dans l'analyse prédictive, le machine learning et la visualisation de données, 
+                        j'accompagne les entreprises dans leur transformation data-driven. Je reste constamment 
+                        à l'affût des dernières innovations en IA et contribue à la communauté open source.
+                    </p>
+                    <p>
+                        Mon approche combine rigueur scientifique et pragmatisme business. Je crois fermement 
+                        que les meilleures solutions naissent de la collaboration entre expertise technique 
+                        et compréhension métier. Chaque projet est une opportunité d'apprendre et d'innover.
+                    </p>
+                    <p>
+                        Au-delà des aspects techniques, je m'attache à créer des solutions éthiques et 
+                        responsables, conscient de l'impact que peuvent avoir les algorithmes sur la société.
+                    </p>
+                </div>
+                <div class="about-image fade-in">
+                    <div class="image-placeholder">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 3rem; color: var(--text-dark);">Quelques chiffres</h2>
+                <div class="stats-grid">
+                    <div class="stat-card fade-in">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Années d'expérience</div>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <div class="stat-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Modèles ML déployés</div>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Précision moyenne</div>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Projets réalisés</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="values-section">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 3rem; color: var(--text-dark);">Mes valeurs</h2>
+                <div class="values-grid">
+                    <div class="value-card fade-in">
+                        <div class="value-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Innovation</h3>
+                        <p>
+                            Toujours à la recherche de solutions créatives et de nouvelles approches 
+                            pour résoudre des problèmes complexes avec les dernières technologies.
+                        </p>
+                    </div>
+                    <div class="value-card fade-in">
+                        <div class="value-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Éthique</h3>
+                        <p>
+                            Développement responsable de l'IA avec une attention particulière aux 
+                            biais algorithmiques et à l'impact sociétal des solutions proposées.
+                        </p>
+                    </div>
+                    <div class="value-card fade-in">
+                        <div class="value-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Collaboration</h3>
+                        <p>
+                            Travail en équipe et communication transparente pour créer des solutions 
+                            qui répondent véritablement aux besoins des utilisateurs finaux.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Journey Section -->
+        <section class="journey-section">
+            <div class="journey-content">
+                <h2>Mon parcours</h2>
+                <div class="timeline">
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2025 - Présent</div>
+                            <div class="timeline-title">CentraleSupélec - 3ème année</div>
+                            <div class="timeline-description">
+                                Spécialisation en Science des Données et de l'Information avec une dominante 
+                                Mathématiques et Data Science.
+                            </div>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2024</div>
+                            <div class="timeline-title">Université Laval - Échange</div>
+                            <div class="timeline-description">
+                                Semestre d'échange au Québec, formation en informatique et mathématiques 
+                                appliquées à la computer science.
+                            </div>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2021 - 2025</div>
+                            <div class="timeline-title">EPF Engineering School</div>
+                            <div class="timeline-description">
+                                Formation d'ingénieur généraliste avec majeure Data Engineering. 
+                                Major de promotion en 2ᵉ et 4ᵉ année.
+                            </div>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2020</div>
+                            <div class="timeline-title">Découverte de la Data Science</div>
+                            <div class="timeline-description">
+                                Premiers pas dans l'analyse de données et le machine learning. 
+                                Développement d'une passion pour l'intelligence artificielle.
+                            </div>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Collaborons ensemble</h2>
+                    <p>
+                        Vous avez un projet data science en tête ? Discutons de la façon dont 
+                        je peux vous aider à transformer vos données en valeur ajoutée.
+                    </p>
+                    <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="contact.html" class="btn btn-primary">Me contacter</a>
+                        <a href="projects.html" class="btn btn-secondary">Voir mes projets</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 François Thievon. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/animation-sync.js"></script>
+</body>
+</html>

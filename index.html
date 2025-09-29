@@ -4,8 +4,390 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - François Thievon | Data Scientist</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/animations.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Styles spécifiques à la page d'accueil */
+        /* Styles spécifiques à l'accueil */
+        .page-hero {
+            min-height: 100vh;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+
+        .main-content {
+            padding-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-animated-hero);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            z-index: 1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.15);
+            animation: overlayPulse 4s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2rem;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #ffeb3b, #ff9800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+
+        /* Navigation rapide */
+        .quick-nav {
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.97);
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .section-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover .section-icon {
+            transform: scale(1.1) rotate(360deg);
+        }
+
+        .section-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .section-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .section-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--gradient-secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .section-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(233, 30, 99, 0.3);
+        }
+
+        /* About Preview */
+        .about-preview {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-animated-about);
+            background-size: 600% 600%;
+            animation: gentleFlow 12s ease-in-out infinite;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .about-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .about-text h2 {
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat h3 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat p {
+            color: var(--text-light);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .about-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-placeholder {
+            width: 300px;
+            height: 300px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+            animation: floatingBubbles 6s ease-in-out infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                gap: 1rem;
+            }
+
+            .section-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .image-placeholder {
+                width: 200px;
+                height: 200px;
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-card {
+                padding: 2rem;
+            }
+
+            .section-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -16,21 +398,32 @@
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="#home" class="nav-link">Accueil</a>
+                    <a href="index.html" class="nav-link current-page">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#about" class="nav-link">À propos</a>
+                    <a href="about.html" class="nav-link">À propos</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#skills" class="nav-link">Compétences</a>
+                    <a href="skills.html" class="nav-link">Compétences</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#projects" class="nav-link">Projets</a>
+                    <a href="projects.html" class="nav-link">Projets</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
+                    <a href="education.html" class="nav-link">Éducation</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
                 </li>
             </ul>
+            <div class="nav-social">
+                <a href="https://github.com/francois-thievon" target="_blank" class="social-link" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/francois-thievon-19b8692a1/" target="_blank" class="social-link" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
             <div class="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -39,32 +432,102 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">Bonjour, je suis <span class="highlight">François Thievon</span></h1>
-            <p class="hero-subtitle">Ingénieur Data Science & Machine Learning</p>
-            <p class="hero-description">
-                Je transforme les données en insights actionables et développe des solutions d'intelligence artificielle pour résoudre des problèmes complexes.
-            </p>
-            <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">Voir mes projets</a>
-                <a href="#contact" class="btn btn-secondary">Me contacter</a>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="page-hero">
+            <div class="floating-shapes">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-        </div>
-        <div class="hero-image">
-            <div class="profile-circle">
-                <i class="fas fa-chart-line"></i>
+            <div class="floating-bubbles">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-        </div>
-    </section>
+            <div class="page-hero-content">
+                <h1 class="hero-title">Bonjour, je suis <span class="highlight">François Thievon</span></h1>
+                <p class="hero-subtitle">Ingénieur Data Science & Machine Learning</p>
+                <p class="hero-description">
+                    Je transforme les données en insights actionables et développe des solutions d'intelligence artificielle pour résoudre des problèmes complexes.
+                </p>
+                <div class="hero-buttons">
+                    <a href="projects.html" class="btn btn-primary">Voir mes projets</a>
+                    <a href="contact.html" class="btn btn-secondary">Me contacter</a>
+                </div>
+            </div>
+        </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">À propos de moi</h2>
+        <!-- Navigation rapide -->
+        <section class="quick-nav">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 3rem; color: var(--text-dark);">Explorez mon portfolio</h2>
+                <div class="section-grid">
+                    <div class="section-card fade-in">
+                        <div class="section-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>À propos</h3>
+                        <p>Découvrez mon parcours, mes motivations et ma passion pour la data science et l'intelligence artificielle.</p>
+                        <a href="about.html" class="section-link">En savoir plus</a>
+                    </div>
+
+                    <div class="section-card fade-in">
+                        <div class="section-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>Compétences</h3>
+                        <p>Explorez mes compétences techniques en machine learning, data analysis et développement avec des détails interactifs.</p>
+                        <a href="skills.html" class="section-link">Voir compétences</a>
+                    </div>
+
+                    <div class="section-card fade-in">
+                        <div class="section-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h3>Projets</h3>
+                        <p>Consultez mes réalisations en data science, machine learning et intelligence artificielle avec études de cas détaillées.</p>
+                        <a href="projects.html" class="section-link">Voir projets</a>
+                    </div>
+
+                    <div class="section-card fade-in">
+                        <div class="section-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Éducation</h3>
+                        <p>Parcourez mon parcours éducatif et mes formations en ingénierie, mathématiques et data science.</p>
+                        <a href="education.html" class="section-link">Voir parcours</a>
+                    </div>
+
+                    <div class="section-card fade-in">
+                        <div class="section-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Contact</h3>
+                        <p>Contactez-moi pour discuter d'opportunités professionnelles, de collaborations ou de projets data science.</p>
+                        <a href="contact.html" class="section-link">Me contacter</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Preview -->
+        <section class="about-preview">
             <div class="about-content">
                 <div class="about-text">
+                    <h2>Passion pour la Data Science</h2>
                     <p>
                         Ingénieur passionné par la data science et l'intelligence artificielle, je transforme 
                         des données complexes en insights stratégiques. Mon expertise couvre l'ensemble du 
@@ -72,10 +535,9 @@
                     </p>
                     <p>
                         Spécialisé dans l'analyse prédictive, le machine learning et la visualisation de données, 
-                        j'accompagne les entreprises dans leur transformation data-driven. Je reste constamment 
-                        à l'affût des dernières innovations en IA et contribue à la communauté open source.
+                        j'accompagne les entreprises dans leur transformation data-driven.
                     </p>
-                    <div class="about-stats">
+                    <div class="stats-grid">
                         <div class="stat">
                             <h3>5+</h3>
                             <p>Années d'expérience</p>
@@ -89,6 +551,9 @@
                             <p>Précision moyenne</p>
                         </div>
                     </div>
+                    <div style="margin-top: 2rem;">
+                        <a href="about.html" class="btn btn-primary">Découvrir mon parcours</a>
+                    </div>
                 </div>
                 <div class="about-image">
                     <div class="image-placeholder">
@@ -96,594 +561,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Mes Compétences</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Langages Informatiques</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <i class="fab fa-python"></i>
-                            <span>Python</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-r-project"></i>
-                            <span>R</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-database"></i>
-                            <span>SQL</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-cuttlefish"></i>
-                            <span>C++</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-terminal"></i>
-                            <span>Bash</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-java"></i>
-                            <span>Java</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-mobile-alt"></i>
-                            <span>Dart</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-calculator"></i>
-                            <span>Matlab</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>Machine Learning</h3>
-                    <div class="skill-items">
-                        <div class="skill-item interactive-skill" data-details="Scikit-learn, XGBoost, LightGBM, CatBoost">
-                            <i class="fas fa-brain"></i>
-                            <span>Librairies</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>Scikit-learn</li>
-                                    <li>XGBoost</li>
-                                    <li>LightGBM</li>
-                                    <li>CatBoost</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="Linéaire, Logistique, Ridge, Lasso">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Régression</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>Régression linéaire</li>
-                                    <li>Régression logistique</li>
-                                    <li>Ridge & Lasso</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="k-NN, SVM, Random Forest, Gradient Boosting">
-                            <i class="fas fa-sitemap"></i>
-                            <span>Classification</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>k-NN</li>
-                                    <li>SVM</li>
-                                    <li>Random Forest</li>
-                                    <li>Gradient Boosting</li>
-                                    <li>Bagging</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="K-Means, Hiérarchique, K-Medoids">
-                            <i class="fas fa-project-diagram"></i>
-                            <span>Clustering</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>K-Means</li>
-                                    <li>K-Medoids</li>
-                                    <li>Clustering hiérarchique</li>                                    
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="PCA, SVD, MCA">
-                            <i class="fas fa-compress-arrows-alt"></i>
-                            <span>Réduction Dimension</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>PCA</li>
-                                    <li>MCA</li>
-                                    <li>SVD</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="Grid Search, Random Search, Optuna">
-                            <i class="fas fa-cogs"></i>
-                            <span>Optimisation</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>Grid Search</li>
-                                    <li>Random Search</li>
-                                    <li>Optuna</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Deep Learning</h3>
-                    <div class="skill-items">
-                        <div class="skill-item interactive-skill" data-details="TensorFlow, Keras, PyTorch, JAX">
-                            <i class="fas fa-network-wired"></i>
-                            <span>Frameworks</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>TensorFlow</li>
-                                    <li>Keras</li>
-                                    <li>PyTorch</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="Réseaux de Neurones">
-                            <i class="fas fa-brain"></i>
-                            <span>Réseaux de Neurones</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>Réseaux de Neurones</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="NLP, Computer Vision, Time Series, Transformers">
-                            <i class="fas fa-brain"></i>
-                            <span>Applications</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>NLP</li>
-                                    <li>Computer Vision</li>
-                                    <li>Time Series</li>
-                                    <li>Transformers</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Data Manipulation</h3>
-                    <div class="skill-items">
-                        <div class="skill-item interactive-skill" data-details="DataFrame, Series, Groupby, Merge">
-                            <i class="fas fa-table"></i>
-                            <span>Pandas</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>DataFrame</li>
-                                    <li>Data Cleaning</li>
-                                    <li>Groupby Operations</li>
-                                    <li>Merge & Join</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="Arrays, Linear Algebra, Broadcasting, Statistics">
-                            <i class="fas fa-superscript"></i>
-                            <span>NumPy</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>N-dimensional Arrays</li>
-                                    <li>Linear Algebra</li>
-                                    <li>Broadcasting</li>
-                                    <li>Statistical Functions</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="Scaling, Encoding, Selection, Creation">
-                            <i class="fas fa-wrench"></i>
-                            <span>Feature Engineering</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>Feature Scaling</li>
-                                    <li>Categorical Encoding</li>
-                                    <li>Feature Selection</li>
-                                    <li>Feature Creation</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="Cleaning, Transformation, ETL, Pipelines">
-                            <i class="fas fa-broom"></i>
-                            <span>Data Cleaning</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>Missing Data Handling</li>
-                                    <li>Outlier Detection</li>
-                                    <li>Data Transformation</li>
-                                    <li>ETL Pipelines</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Data Visualization</h3>
-                    <div class="skill-items">
-                        <div class="skill-item interactive-skill" data-details="Dashboards, Reports, KPIs, Business Intelligence">
-                            <i class="fas fa-chart-bar"></i>
-                            <span>Power BI</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>Interactive Dashboards</li>
-                                    <li>Business Reports</li>
-                                    <li>KPI Monitoring</li>
-                                    <li>Data Modeling</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="Dashboards, Reports, KPIs, Business Intelligence">
-                            <i class="fas fa-chart-bar"></i>
-                            <span>Power BI</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>Interactive Dashboards</li>
-                                    <li>Business Reports</li>
-                                    <li>KPI Monitoring</li>
-                                    <li>Data Modeling</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="Plots, Subplots, Customization, Export">
-                            <i class="fas fa-chart-area"></i>
-                            <span>Matplotlib</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>Static Plots</li>
-                                    <li>Subplots</li>
-                                    <li>Customization</li>
-                                    <li>Export Formats</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="Statistical Plots, Heatmaps, Distributions">
-                            <i class="fas fa-palette"></i>
-                            <span>Seaborn</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>Statistical Plots</li>
-                                    <li>Correlation Heatmaps</li>
-                                    <li>Distribution Plots</li>
-                                    <li>Pair Plots</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="Interactive Plots, Dashboards, 3D, Animation">
-                            <i class="fas fa-chart-pie"></i>
-                            <span>Plotly</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>Interactive Charts</li>
-                                    <li>3D Visualizations</li>
-                                    <li>Dash Dashboards</li>
-                                    <li>Animations</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="Grammar of Graphics, Aesthetics, Facets">
-                            <i class="fab fa-r-project"></i>
-                            <span>ggplot2</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>Grammar of Graphics</li>
-                                    <li>Layered Approach</li>
-                                    <li>Aesthetic Mappings</li>
-                                    <li>Faceting</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Data Analysis</h3>
-                    <div class="skill-items">
-                        <div class="skill-item interactive-skill" data-details="EDA, Descriptive Statistics, Data Profiling">
-                            <i class="fas fa-search"></i>
-                            <span>EDA</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>Exploratory Data Analysis</li>
-                                    <li>Descriptive Statistics</li>
-                                    <li>Data Profiling</li>
-                                    <li>Pattern Discovery</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="T-test, ANOVA, Chi-square, Mann-Whitney">
-                            <i class="fas fa-vials"></i>
-                            <span>Tests d'Hypothèses</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>T-test</li>
-                                    <li>ANOVA</li>
-                                    <li>Chi-square (χ²)</li>
-                                    <li>Mann-Whitney</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="MLE, MAP, Bayesian Inference, Prior/Posterior">
-                            <i class="fas fa-calculator"></i>
-                            <span>Estimateurs</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>Maximum Likelihood (MLE)</li>
-                                    <li>Maximum A Posteriori (MAP)</li>
-                                    <li>Bayesian Inference</li>
-                                    <li>Prior/Posterior</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="Bayesian Networks, Probabilistic Models, Causal Inference">
-                            <i class="fas fa-project-diagram"></i>
-                            <span>Réseaux Bayésiens</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>Bayesian Networks</li>
-                                    <li>Probabilistic Models</li>
-                                    <li>Causal Inference</li>
-                                    <li>Graphical Models</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Big Data & Orchestration</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <i class="fas fa-bolt"></i>
-                            <span>Apache Spark</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-stream"></i>
-                            <span>Kafka</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-wind"></i>
-                            <span>Airflow</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <span>MinIO</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>DevOps & Outils</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <i class="fab fa-docker"></i>
-                            <span>Docker</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-dharmachakra"></i>
-                            <span>Kubernetes</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-git-alt"></i>
-                            <span>Git</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-github"></i>
-                            <span>GitHub</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-gitlab"></i>
-                            <span>GitLab</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-play-circle"></i>
-                            <span>CI/CD</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Langues</h3>
-                    <div class="skill-items">
-                        <div class="skill-item interactive-skill" data-details="940 TOEIC, B2+/C1">
-                            <i class="fas fa-flag-usa"></i>
-                            <span>Anglais</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>940 TOEIC</li>
-                                    <li>Niveau B2+/C1</li>
-                                    <li>Professionnel</li>
-                                    <li>Technique</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="skill-item interactive-skill" data-details="Niveau A2">
-                            <i class="fas fa-flag"></i>
-                            <span>Espagnol</span>
-                            <div class="skill-tooltip">
-                                <ul>
-                                    <li>Niveau A2</li>
-                                    <li>Élémentaire</li>
-                                    <li>Conversation basique</li>
-                                    <li>En apprentissage</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Mes Projets</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Prédiction Prix Immobilier</h3>
-                        <p>Modèle de machine learning pour prédire les prix immobiliers avec une précision de 92%. Analyse de 50k+ propriétés avec features engineering avancé.</p>
-                        <div class="project-tech">
-                            <span>Python</span>
-                            <span>Scikit-learn</span>
-                            <span>XGBoost</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-eye"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Classification d'Images Médicales</h3>
-                        <p>CNN pour détecter des anomalies sur radiographies pulmonaires. Déployé en production avec FastAPI et Docker, utilisé par 3 hôpitaux.</p>
-                        <div class="project-tech">
-                            <span>TensorFlow</span>
-                            <span>OpenCV</span>
-                            <span>FastAPI</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Analyse de Sentiment Client</h3>
-                        <p>Pipeline NLP temps réel pour analyser les avis clients sur réseaux sociaux. Traitement de 10k+ messages/jour avec alertes automatiques.</p>
-                        <div class="project-tech">
-                            <span>spaCy</span>
-                            <span>BERT</span>
-                            <span>Apache Kafka</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Système de Recommandation</h3>
-                        <p>Moteur de recommandation hybride pour e-commerce avec filtrage collaboratif et deep learning. Augmentation du CA de 23%.</p>
-                        <div class="project-tech">
-                            <span>PyTorch</span>
-                            <span>Neo4j</span>
-                            <span>Redis</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Contactez-moi</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Transformons vos données en valeur</h3>
-                    <p>
-                        Vous êtes à la recherche d'un futur ingénieur spécialisé dans les Mathématiques et la Data Science ?
-                        N'hésitez pas à me contacter si vous avez une offre à me proposer. 😊
-                    </p>
-                    <div class="contact-items">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>thievon.francois@gmail.com</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span>+33 7 81 44 22 28</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Montpellier, France</span>
-                        </div>
-                    </div>
-                    <div class="social-links">
-                        <a href="#" class="social-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-                <form class="contact-form">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Votre nom" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Votre email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="subject" name="subject" placeholder="Sujet" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="message" name="message" placeholder="Votre message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Envoyer le message</button>
-                </form>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
@@ -692,6 +571,8 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/animation-sync.js"></script>
 </body>
 </html>

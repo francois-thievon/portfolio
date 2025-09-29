@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - François Thievon | Data Scientist</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Styles spécifiques à la page Contact */
+        .main-content {
+            padding-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Contact Hero Section */
+        .contact-hero {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-animated-contact);
+            background-size: 800% 800%;
+            animation: contactFlow 18s linear infinite;
+            z-index: 1;
+        }
+
+        .contact-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.12);
+            animation: overlayPulse 3.5s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        @keyframes contactFlow {
+            0% { background-position: 0% 0%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        .contact-hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .contact-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Contact Content */
+        .contact-content {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            color: white;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .contact-details {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+
+        .contact-details li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-details i {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form h2 {
+            color: var(--text-dark);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Status Messages */
+        .form-status {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .form-status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .form-status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Quick Contact Section */
+        .quick-contact {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        }
+
+        .quick-contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .quick-contact-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .quick-contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .quick-contact-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .quick-contact-title {
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-contact-text {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .quick-contact-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .quick-contact-link:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-hero p {
+                font-size: 1.1rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-info,
+            .contact-form {
+                padding: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-info,
+            .contact-form {
+                padding: 1.5rem;
+            }
+
+            .quick-contact-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h3>Portfolio</h3>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">À propos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="skills.html" class="nav-link">Compétences</a>
+                </li>
+                <li class="nav-item">
+                    <a href="projects.html" class="nav-link">Projets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="education.html" class="nav-link">Éducation</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link current-page">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://github.com/francois-thievon" target="_blank" class="social-link" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/francois-thievon-19b8692a1/" target="_blank" class="social-link" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Contact Hero Section -->
+        <section class="page-hero">
+            <div class="floating-shapes">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="floating-bubbles">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="page-hero-content">
+                <h1>Contactez-moi</h1>
+                <p>
+                    Prêt à transformer vos données en insights ? 
+                    Discutons de votre prochain projet data science !
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Content -->
+        <section class="contact-content">
+            <div class="contact-container">
+                <!-- Contact Info -->
+                <div class="contact-info fade-in">
+                    <h2>Parlons de votre projet</h2>
+                    <p>
+                        Je suis toujours enthousiaste à l'idée de découvrir de nouveaux défis en data science. 
+                        Que ce soit pour un projet, une collaboration ou simplement pour échanger sur l'IA, 
+                        n'hésitez pas à me contacter !
+                    </p>
+
+                    <ul class="contact-details">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email</strong><br>
+                                francois.thievon@email.com
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Téléphone</strong><br>
+                                +33 6 12 34 56 78
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Localisation</strong><br>
+                                Paris, France
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Disponibilité</strong><br>
+                                Lun - Ven, 9h - 18h
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/francois-thievon-19b8692a1/" target="_blank" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/francois-thievon" target="_blank" class="social-link" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:francois.thievon@email.com" class="social-link" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="tel:+33612345678" class="social-link" title="Téléphone">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form fade-in">
+                    <h2>Envoyez-moi un message</h2>
+                    
+                    <div id="form-status" class="form-status"></div>
+
+                    <form id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">Prénom *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Nom *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Entreprise</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Sujet *</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required placeholder="Décrivez votre projet ou votre demande..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Envoyer le message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Contact Section -->
+        <section class="quick-contact">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Contactez-moi rapidement</h2>
+                    <p>Plusieurs moyens pour me joindre selon vos préférences</p>
+                </div>
+
+                <div class="quick-contact-grid">
+                    <div class="quick-contact-card fade-in">
+                        <div class="quick-contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <h3 class="quick-contact-title">LinkedIn</h3>
+                        <p class="quick-contact-text">Connectons-nous professionnellement</p>
+                        <a href="https://www.linkedin.com/in/francois-thievon-19b8692a1/" target="_blank" class="quick-contact-link">
+                            Voir le profil
+                        </a>
+                    </div>
+
+                    <div class="quick-contact-card fade-in">
+                        <div class="quick-contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h3 class="quick-contact-title">GitHub</h3>
+                        <p class="quick-contact-text">Explorez mes projets open source</p>
+                        <a href="https://github.com/francois-thievon" target="_blank" class="quick-contact-link">
+                            Voir les repos
+                        </a>
+                    </div>
+
+                    <div class="quick-contact-card fade-in">
+                        <div class="quick-contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="quick-contact-title">Email Direct</h3>
+                        <p class="quick-contact-text">Pour une communication directe</p>
+                        <a href="mailto:francois.thievon@email.com" class="quick-contact-link">
+                            Envoyer un email
+                        </a>
+                    </div>
+
+                    <div class="quick-contact-card fade-in">
+                        <div class="quick-contact-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <h3 class="quick-contact-title">Consultation</h3>
+                        <p class="quick-contact-text">Planifiez un appel gratuit de 30 min</p>
+                        <a href="#" class="quick-contact-link">
+                            Réserver un créneau
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 François Thievon. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/animation-sync.js"></script>
+    <script>
+        // Gestion du formulaire de contact
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contact-form');
+            const formStatus = document.getElementById('form-status');
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Récupération des données du formulaire
+                const formData = new FormData(contactForm);
+                const data = Object.fromEntries(formData);
+
+                // Simulation d'envoi (remplacer par vraie logique d'envoi)
+                simulateFormSubmission(data);
+            });
+
+            function simulateFormSubmission(data) {
+                // Afficher un message de chargement
+                showFormStatus('Envoi en cours...', 'info');
+
+                // Désactiver le bouton de soumission
+                const submitBtn = contactForm.querySelector('.submit-btn');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
+                submitBtn.disabled = true;
+
+                // Simuler un délai d'envoi
+                setTimeout(() => {
+                    // Simuler un succès (90% de chance)
+                    if (Math.random() > 0.1) {
+                        showFormStatus('Message envoyé avec succès ! Je vous répondrai rapidement.', 'success');
+                        contactForm.reset();
+                    } else {
+                        showFormStatus('Erreur lors de l\'envoi. Veuillez réessayer ou utiliser l\'email direct.', 'error');
+                    }
+
+                    // Réactiver le bouton
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+
+                    // Masquer le message après 5 secondes
+                    setTimeout(() => {
+                        hideFormStatus();
+                    }, 5000);
+                }, 2000);
+            }
+
+            function showFormStatus(message, type) {
+                formStatus.textContent = message;
+                formStatus.className = `form-status ${type}`;
+                formStatus.style.display = 'block';
+            }
+
+            function hideFormStatus() {
+                formStatus.style.display = 'none';
+            }
+
+            // Animation des inputs au focus
+            const inputs = contactForm.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentNode.style.transform = 'scale(1.02)';
+                });
+
+                input.addEventListener('blur', function() {
+                    this.parentNode.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets - François Thievon | Data Scientist</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Styles spécifiques à la page Projets */
+        .main-content {
+            padding-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Projects Hero Section */
+        .projects-hero {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .projects-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-animated-projects);
+            background-size: 800% 800%;
+            animation: rainbowShift 15s linear infinite;
+            z-index: 1;
+        }
+
+        .projects-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.15);
+            animation: overlayPulse 4s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        .projects-hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .projects-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .projects-hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Projects Content */
+        .projects-content {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-image {
+            height: 200px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.1), transparent);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-content h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .project-content p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tech span {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-secondary);
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .project-link:hover {
+            transform: translateY(-2px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(233, 30, 99, 0.3);
+        }
+
+        /* Project Categories */
+        .project-categories {
+            padding: 2rem 0 4rem;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        }
+
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            color: var(--text-dark);
+            border: 2px solid var(--primary-color);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .projects-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .projects-hero p {
+                font-size: 1.1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .project-card {
+                margin: 0 1rem;
+            }
+
+            .category-filter {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .projects-hero h1 {
+                font-size: 2rem;
+            }
+
+            .project-content {
+                padding: 1.5rem;
+            }
+
+            .project-image {
+                height: 150px;
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h3>Portfolio</h3>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">À propos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="skills.html" class="nav-link">Compétences</a>
+                </li>
+                <li class="nav-item">
+                    <a href="projects.html" class="nav-link current-page">Projets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="education.html" class="nav-link">Éducation</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://github.com/francois-thievon" target="_blank" class="social-link" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/francois-thievon-19b8692a1/" target="_blank" class="social-link" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Projects Hero Section -->
+        <section class="page-hero">
+            <div class="floating-shapes">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="floating-bubbles">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="page-hero-content">
+                <h1>Mes Projets</h1>
+                <p>
+                    Découvrez mes réalisations en data science, machine learning et intelligence artificielle. 
+                    Chaque projet représente une solution innovante à des défis réels.
+                </p>
+            </div>
+        </section>
+
+        <!-- Project Categories -->
+        <section class="project-categories">
+            <div class="container">
+                <div class="category-filter">
+                    <button class="filter-btn active" data-category="all">Tous</button>
+                    <button class="filter-btn" data-category="ml">Machine Learning</button>
+                    <button class="filter-btn" data-category="dl">Deep Learning</button>
+                    <button class="filter-btn" data-category="nlp">NLP</button>
+                    <button class="filter-btn" data-category="cv">Computer Vision</button>
+                    <button class="filter-btn" data-category="analytics">Analytics</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Content -->
+        <section class="projects-content">
+            <div class="projects-grid">
+                <!-- Projet 1 -->
+                <div class="project-card fade-in" data-category="ml analytics">
+                    <div class="project-image">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Prédiction Prix Immobilier</h3>
+                        <p>Modèle de machine learning pour prédire les prix immobiliers avec une précision de 92%. Analyse de 50k+ propriétés avec features engineering avancé et optimisation d'hyperparamètres.</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>Scikit-learn</span>
+                            <span>XGBoost</span>
+                            <span>Pandas</span>
+                            <span>Plotly</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-link" title="Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 2 -->
+                <div class="project-card fade-in" data-category="dl cv">
+                    <div class="project-image">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Classification d'Images Médicales</h3>
+                        <p>CNN pour détecter des anomalies sur radiographies pulmonaires. Déployé en production avec FastAPI et Docker, utilisé par 3 hôpitaux avec 94% de précision.</p>
+                        <div class="project-tech">
+                            <span>TensorFlow</span>
+                            <span>OpenCV</span>
+                            <span>FastAPI</span>
+                            <span>Docker</span>
+                            <span>AWS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-link" title="Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 3 -->
+                <div class="project-card fade-in" data-category="nlp dl">
+                    <div class="project-image">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Analyse de Sentiment Client</h3>
+                        <p>Pipeline NLP temps réel pour analyser les avis clients sur réseaux sociaux. Traitement de 10k+ messages/jour avec alertes automatiques et dashboard interactif.</p>
+                        <div class="project-tech">
+                            <span>spaCy</span>
+                            <span>BERT</span>
+                            <span>Apache Kafka</span>
+                            <span>Streamlit</span>
+                            <span>Redis</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-link" title="Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 4 -->
+                <div class="project-card fade-in" data-category="ml dl">
+                    <div class="project-image">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Système de Recommandation</h3>
+                        <p>Moteur de recommandation hybride pour e-commerce avec filtrage collaboratif et deep learning. Augmentation du CA de 23% et amélioration de l'engagement utilisateur.</p>
+                        <div class="project-tech">
+                            <span>PyTorch</span>
+                            <span>Neo4j</span>
+                            <span>Redis</span>
+                            <span>FastAPI</span>
+                            <span>MLflow</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-link" title="Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 5 -->
+                <div class="project-card fade-in" data-category="analytics ml">
+                    <div class="project-image">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Dashboard Analytics Avancé</h3>
+                        <p>Plateforme de business intelligence complète avec analyses prédictives, KPIs temps réel et alertes automatiques. Interface responsive pour mobile et desktop.</p>
+                        <div class="project-tech">
+                            <span>Power BI</span>
+                            <span>Python</span>
+                            <span>SQL Server</span>
+                            <span>DAX</span>
+                            <span>Power Query</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-link" title="Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 6 -->
+                <div class="project-card fade-in" data-category="ml analytics">
+                    <div class="project-image">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Prédiction de Maintenance</h3>
+                        <p>Système prédictif pour la maintenance industrielle utilisant l'IoT et le machine learning. Réduction des pannes de 40% et optimisation des coûts de maintenance.</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>Time Series</span>
+                            <span>IoT</span>
+                            <span>Apache Airflow</span>
+                            <span>Grafana</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-link" title="Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 7 -->
+                <div class="project-card fade-in" data-category="cv dl">
+                    <div class="project-image">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Détection d'Objets Temps Réel</h3>
+                        <p>Application de computer vision pour la détection et classification d'objets en temps réel. Optimisée pour fonctionner sur edge devices avec YOLO et TensorRT.</p>
+                        <div class="project-tech">
+                            <span>YOLO</span>
+                            <span>TensorRT</span>
+                            <span>OpenCV</span>
+                            <span>CUDA</span>
+                            <span>Flask</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-link" title="Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 8 -->
+                <div class="project-card fade-in" data-category="nlp dl">
+                    <div class="project-image">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Chatbot Intelligence Artificielle</h3>
+                        <p>Assistant conversationnel avancé utilisant les derniers modèles de language. Interface multimodale avec compréhension du contexte et mémoire à long terme.</p>
+                        <div class="project-tech">
+                            <span>Transformers</span>
+                            <span>Langchain</span>
+                            <span>Vector DB</span>
+                            <span>React</span>
+                            <span>WebSocket</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-link" title="Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 François Thievon. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/animation-sync.js"></script>
+    <script>
+        // Filtrage des projets
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+
+                    // Mettre à jour les boutons actifs
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Filtrer les projets
+                    projectCards.forEach(card => {
+                        const cardCategories = card.getAttribute('data-category');
+                        
+                        if (category === 'all' || cardCategories.includes(category)) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 100);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
