@@ -15,64 +15,6 @@
             min-height: calc(100vh - 80px);
         }
 
-        /* Skills Hero Section */
-        .skills-hero {
-            position: relative;
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .skills-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--bg-animated-skills);
-            background-size: 300% 300%;
-            animation: radialZoom 10s ease-in-out infinite;
-            z-index: 1;
-        }
-
-        .skills-hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.2);
-            animation: overlayPulse 4s ease-in-out infinite;
-            z-index: 2;
-        }
-
-        .skills-hero-content {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-            max-width: 800px;
-            padding: 0 20px;
-        }
-
-        .skills-hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .skills-hero p {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.95);
-            line-height: 1.6;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
-
         /* Skills Content Section */
         .skills-content {
             padding: 5rem 0;
@@ -394,10 +336,6 @@
         }
 
         @media (max-width: 480px) {
-            .skills-hero h1 {
-                font-size: 2rem;
-            }
-
             .skill-category {
                 padding: 1.5rem;
             }

@@ -1,188 +1,178 @@
-// Gestion de la continuité des animations entre les pages
+// Synchronisation continue des animations entre les pages
 document.addEventListener('DOMContentLoaded', function() {
-    const ANIMATION_KEY = 'portfolio_animation_time';
-    const BUBBLE_KEY = 'portfolio_bubble_time';
-
-    // Récupérer le temps d'animation sauvegardé
-    function getAnimationTime() {
-        const savedTime = sessionStorage.getItem(ANIMATION_KEY);
-        return savedTime ? parseFloat(savedTime) : 0;
+    const ANIMATION_DURATION = 30; // 30 secondes - durée de l'animation horizontalSweep
+    
+    // Calculer la position actuelle dans le cycle d'animation basée sur le temps absolu
+    function getCurrentAnimationOffset() {
+        const now = Date.now() / 1000; // Temps en secondes
+        const cyclePosition = now % ANIMATION_DURATION; // Position dans le cycle de 30s
+        return cyclePosition;
     }
 
-    // Sauvegarder le temps d'animation
-    function saveAnimationTime(time) {
-        sessionStorage.setItem(ANIMATION_KEY, time.toString());
-    }
-
-    // Récupérer le temps des bulles sauvegardé
-    function getBubbleTime() {
-        const savedTime = sessionStorage.getItem(BUBBLE_KEY);
-        return savedTime ? parseFloat(savedTime) : 0;
-    }
-
-    // Sauvegarder le temps des bulles
-    function saveBubbleTime(time) {
-        sessionStorage.setItem(BUBBLE_KEY, time.toString());
-    }
-
-    // Synchroniser les animations de fond
-    function syncBackgroundAnimations() {
+    // Synchroniser l'animation de fond principal
+    function syncBackgroundAnimation() {
         const heroSection = document.querySelector('.page-hero');
         if (!heroSection) return;
 
-        const startTime = getAnimationTime();
-        const currentTime = Date.now();
+        const offset = getCurrentAnimationOffset();
+        const delay = -offset; // Décalage négatif pour reprendre à la bonne position
         
-        // Calculer le décalage depuis la dernière page
-        const timeOffset = ((currentTime - startTime) / 1000) % 1000; // Modulo pour éviter les grands nombres
-
-        // Appliquer le décalage aux animations CSS
-        const beforeElement = heroSection;
-        if (beforeElement) {
-            beforeElement.style.setProperty('--animation-delay', `-${timeOffset}s`);
+        // Créer ou mettre à jour le style pour l'animation synchronisée
+        let syncStyle = document.getElementById('sync-animation-style');
+        if (!syncStyle) {
+            syncStyle = document.createElement('style');
+            syncStyle.id = 'sync-animation-style';
+            document.head.appendChild(syncStyle);
         }
-
-        // Mettre à jour l'animation avec le décalage
-        heroSection.style.animationDelay = `-${timeOffset}s`;
+        
+        syncStyle.textContent = `
+            .page-hero::before {
+                animation: horizontalSweep 30s ease-in-out infinite;
+                animation-delay: ${delay}s !important;
+            }
+        `;
     }
 
-    // Synchroniser les bulles flottantes
-    function syncBubbleAnimations() {
+    // Synchroniser les bulles flottantes avec le même principe
+    function syncFloatingElements() {
         const bubbles = document.querySelectorAll('.floating-bubbles span');
-        if (bubbles.length === 0) return;
-
-        const startTime = getBubbleTime();
-        const currentTime = Date.now();
-        
-        bubbles.forEach((bubble, index) => {
-            const originalDelay = parseFloat(getComputedStyle(bubble).animationDelay) || 0;
-            const timeOffset = ((currentTime - startTime) / 1000 + originalDelay) % 1000;
-            
-            bubble.style.animationDelay = `-${timeOffset}s`;
-        });
-    }
-
-    // Démarrer les animations synchronisées
-    function startSyncedAnimations() {
-        const currentTime = Date.now();
-        
-        // Si c'est la première page ou si trop de temps s'est écoulé, réinitialiser
-        const lastTime = getAnimationTime();
-        if (!lastTime || (currentTime - lastTime) > 30000) { // 30 secondes max
-            saveAnimationTime(currentTime);
-            saveBubbleTime(currentTime);
-        }
-
-        // Synchroniser les animations
-        syncBackgroundAnimations();
-        syncBubbleAnimations();
-
-        // Démarrer le tracking continu
-        startAnimationTracking();
-    }
-
-    // Tracker le temps d'animation en continu
-    function startAnimationTracking() {
-        setInterval(() => {
-            saveAnimationTime(Date.now());
-            saveBubbleTime(Date.now());
-        }, 1000); // Mettre à jour chaque seconde
-    }
-
-    // Améliorer la transition avec un fade fluide
-    function setupPageTransition() {
-        const links = document.querySelectorAll('a[href$=".html"]');
-        
-        links.forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Sauvegarder l'état actuel avant de changer de page
-                saveAnimationTime(Date.now());
-                saveBubbleTime(Date.now());
-                
-                // Optionnel : effet de transition
-                document.body.style.opacity = '0.95';
-                setTimeout(() => {
-                    document.body.style.opacity = '1';
-                }, 100);
-            });
-        });
-    }
-
-    // Synchronisation avancée pour les formes flottantes
-    function syncFloatingShapes() {
         const shapes = document.querySelectorAll('.floating-shapes span');
-        if (shapes.length === 0) return;
-
-        const startTime = getAnimationTime();
-        const currentTime = Date.now();
         
-        shapes.forEach((shape, index) => {
-            const originalDelay = index * 0.5; // Décalage original
-            const timeOffset = ((currentTime - startTime) / 1000 + originalDelay) % 1000;
+        [...bubbles, ...shapes].forEach((element, index) => {
+            // Chaque élément a sa propre durée d'animation (récupérée du CSS)
+            const computedStyle = getComputedStyle(element);
+            const duration = parseFloat(computedStyle.animationDuration) || 8; // fallback 8s
+            const originalDelay = parseFloat(computedStyle.animationDelay) || 0;
             
-            shape.style.animationDelay = `-${timeOffset}s`;
+            const now = Date.now() / 1000;
+            const cyclePosition = (now + originalDelay) % duration;
+            const newDelay = -cyclePosition;
+            
+            element.style.animationDelay = `${newDelay}s`;
         });
     }
 
-    // Initialiser tout
-    function initializeContinuousAnimations() {
-        // Attendre que les CSS soient chargés
-        setTimeout(() => {
-            startSyncedAnimations();
-            syncFloatingShapes();
-            setupPageTransition();
-            
-            // Ajouter une classe pour indiquer que les animations sont synchronisées
-            document.body.classList.add('animations-synced');
-        }, 100);
+    // Synchroniser l'overlay pulse
+    function syncOverlayAnimation() {
+        const overlay = document.querySelector('.page-hero::after');
+        if (!overlay) return;
+        
+        const OVERLAY_DURATION = 4; // 4 secondes pour overlayPulse
+        const now = Date.now() / 1000;
+        const cyclePosition = now % OVERLAY_DURATION;
+        const delay = -cyclePosition;
+        
+        // Ajouter le style pour l'overlay
+        let overlayStyle = document.getElementById('sync-overlay-style');
+        if (!overlayStyle) {
+            overlayStyle = document.createElement('style');
+            overlayStyle.id = 'sync-overlay-style';
+            document.head.appendChild(overlayStyle);
+        }
+        
+        overlayStyle.textContent = `
+            .page-hero::after {
+                animation: overlayPulse 4s ease-in-out infinite;
+                animation-delay: ${delay}s !important;
+            }
+        `;
     }
 
-    // Démarrer l'initialisation
-    initializeContinuousAnimations();
+    // Fonction principale de synchronisation
+    function synchronizeAllAnimations() {
+        syncBackgroundAnimation();
+        syncFloatingElements();
+        syncOverlayAnimation();
+        
+        // Ajouter une classe pour indiquer que tout est synchronisé
+        document.body.classList.add('animations-synchronized');
+    }
 
-    // Nettoyer les données anciennes au changement de session
-    window.addEventListener('beforeunload', function() {
-        // Garder les données pour la session, mais les nettoyer après 1 heure
-        setTimeout(() => {
-            sessionStorage.removeItem(ANIMATION_KEY);
-            sessionStorage.removeItem(BUBBLE_KEY);
-        }, 3600000); // 1 heure
+    // Améliorer les transitions entre pages et empêcher le reload de la page actuelle
+    function setupSmoothPageTransitions() {
+        // Obtenir le nom de la page actuelle
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        
+        // Sélectionner tous les liens de navigation
+        const navLinks = document.querySelectorAll('nav a[href$=".html"], .nav-links a[href$=".html"]');
+        
+        navLinks.forEach(link => {
+            const linkPage = link.getAttribute('href').split('/').pop();
+            
+            // Si le lien pointe vers la page actuelle, empêcher le rechargement
+            if (linkPage === currentPage) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); // Empêcher la navigation
+                    
+                    // Optionnel : effet visuel pour indiquer qu'on est déjà sur cette page
+                    link.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        link.style.transform = 'scale(1)';
+                    }, 150);
+                    
+                    return false;
+                });
+            } else {
+                // Pour les autres pages, ajouter un effet de transition subtil
+                link.addEventListener('click', function(e) {
+                    // Sauvegarder l'état de l'animation avant de changer de page
+                    const currentTime = Date.now();
+                    sessionStorage.setItem('portfolio_animation_timestamp', currentTime.toString());
+                    
+                    // Effet de transition subtil
+                    document.body.style.transition = 'opacity 0.1s ease-out';
+                    document.body.style.opacity = '0.98';
+                    
+                    // Restaurer l'opacité après un court délai
+                    setTimeout(() => {
+                        document.body.style.opacity = '1';
+                    }, 50);
+                });
+            }
+        });
+    }
+
+    // Démarrer la synchronisation après un court délai pour laisser le CSS se charger
+    setTimeout(initSync, 100);
+    
+    // Re-synchroniser quand la page redevient visible
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
+            setTimeout(synchronizeAllAnimations, 50);
+        }
     });
+
+    // Exposer la fonction pour usage externe (navigation AJAX, etc.)
+    window.resyncAnimations = synchronizeAllAnimations;
 });
 
-// CSS personnalisé pour améliorer la synchronisation
-const style = document.createElement('style');
-style.textContent = `
-    /* Amélioration de la fluidité des animations */
+// Styles pour améliorer la synchronisation
+const syncStyles = document.createElement('style');
+syncStyles.textContent = `
+    /* Assurer que les animations sont bien configurées pour la synchronisation */
     .page-hero::before,
-    .page-hero::after {
-        animation-fill-mode: both;
-        animation-timing-function: linear;
-    }
-
+    .page-hero::after,
     .floating-bubbles span,
     .floating-shapes span {
         animation-fill-mode: both;
-        animation-timing-function: linear;
+        will-change: transform, opacity, background-position;
+        transform: translateZ(0); /* Optimisation GPU */
     }
 
-    /* Transition plus fluide entre les pages */
+    /* Transition fluide entre les pages */
     body {
-        transition: opacity 0.2s ease;
+        transition: opacity 0.15s ease-out;
     }
 
-    /* Assurer la continuité visuelle */
-    .animations-synced .page-hero::before {
-        animation-play-state: running;
+    /* Indicateur visuel que les animations sont synchronisées */
+    .animations-synchronized .page-hero {
+        opacity: 1;
     }
 
-    /* Optimisation des performances */
-    .page-hero,
-    .floating-bubbles,
-    .floating-shapes {
+    /* Optimisations de performance */
+    .page-hero {
+        contain: layout style paint;
         transform: translateZ(0);
-        backface-visibility: hidden;
-        perspective: 1000px;
     }
 `;
-document.head.appendChild(style);
+document.head.appendChild(syncStyles);
