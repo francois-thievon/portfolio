@@ -180,6 +180,37 @@ p {
     overflow: hidden;
 }
 
+/* Header sticky pour les pages secondaires */
+.secondary-page .page-hero {
+    position: sticky;
+    top: 80px; /* Juste sous la navigation */
+    z-index: 100;
+    min-height: 60vh;
+    transition: none; /* Pas de transition CSS, géré par JS */
+}
+
+/* Maintenir l'animation du dégradé en toutes circonstances */
+.secondary-page .page-hero::before {
+    background: var(--bg-animated-skills);
+    background-size: 300% 100%;
+    animation: horizontalSweep 30s ease-in-out infinite;
+}
+
+/* Transitions fluides pour les éléments de contenu */
+.secondary-page .page-hero .page-hero-content p {
+    transition: opacity 0.15s ease, height 0.15s ease, margin 0.15s ease;
+    overflow: hidden;
+}
+
+.secondary-page .page-hero .page-hero-content h1 {
+    transition: font-size 0.15s ease, margin-bottom 0.15s ease;
+}
+
+.secondary-page .page-hero .floating-bubbles,
+.secondary-page .page-hero .floating-shapes {
+    transition: opacity 0.2s ease;
+}
+
 .page-hero::before {
     content: '';
     position: absolute;

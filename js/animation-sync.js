@@ -4,7 +4,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Calculer la position actuelle dans le cycle d'animation basée sur le temps absolu
     function getCurrentAnimationOffset() {
-        const now = Date.now() / 1000; // Temps en secondes
+        // Vérifier s'il y a un timestamp sauvegardé (navigation entre pages)
+        const savedTimestamp = sessionStorage.getItem('portfolio_animation_timestamp');
+        
+        let now;
+        if (savedTimestamp && (Date.now() - parseInt(savedTimestamp)) < 1000) {
+            // Si on vient juste de naviguer (moins d'1 seconde), utiliser le timestamp sauvé
+            now = parseInt(savedTimestamp) / 1000;
+        } else {
+            // Sinon, utiliser le temps actuel
+            now = Date.now() / 1000;
+        }
+        
         const cyclePosition = now % ANIMATION_DURATION; // Position dans le cycle de 30s
         return cyclePosition;
     }
