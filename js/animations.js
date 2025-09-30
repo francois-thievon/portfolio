@@ -66,22 +66,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Animation des compteurs
     function initCounterAnimation() {
         const counters = document.querySelectorAll('.stat-number, .stat h3');
-        const speed = 200; // Plus bas = plus rapide
+        const speed = 500; // Plus bas = plus rapide
 
         const countUp = (counter) => {
-            const target = parseInt(counter.innerText.replace('+', '').replace('%', ''));
+            const originalText = counter.getAttribute('data-original') || counter.innerText;
+            const target = parseInt(originalText.replace('+', '').replace('%', ''));
             const count = +counter.getAttribute('data-count') || 0;
             const inc = target / speed;
 
             if (count < target) {
                 counter.setAttribute('data-count', Math.ceil(count + inc));
-                const suffix = counter.innerText.includes('+') ? '+' : 
-                             counter.innerText.includes('%') ? '%' : '';
+                const suffix = originalText.includes('+') ? '+' : 
+                             originalText.includes('%') ? '%' : '';
                 counter.innerText = Math.ceil(count + inc) + suffix;
-                setTimeout(() => countUp(counter), 1);
+                setTimeout(() => countUp(counter), 20);
             } else {
-                const suffix = counter.innerText.includes('+') ? '+' : 
-                             counter.innerText.includes('%') ? '%' : '';
+                const suffix = originalText.includes('+') ? '+' : 
+                             originalText.includes('%') ? '%' : '';
                 counter.innerText = target + suffix;
             }
         };
@@ -92,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const counter = entry.target;
                     if (!counter.hasAttribute('data-animated')) {
                         counter.setAttribute('data-animated', 'true');
+                        counter.setAttribute('data-original', counter.innerText);
                         counter.setAttribute('data-count', '0');
                         countUp(counter);
                     }
