@@ -183,6 +183,28 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         }
 
+        /* Petits ronds orange sur la ligne centrale */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border: 3px solid white;
+            border-radius: 50%;
+            top: 50%;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -10px;
+        }
+
         .timeline-item:nth-child(odd) .timeline-content::after {
             content: '';
             position: absolute;
