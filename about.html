@@ -12,7 +12,19 @@
         /* Styles spécifiques à la page À propos */
         .main-content {
             padding-top: 80px;
-            min-height: calc(100vh - 80px);
+            min-height: calc(100vh - 160px);
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, #2d3748, #1a202c);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 0;
+            text-align: center;
+            border-top: 4px solid #ff6b35;
+            position: relative;
+            z-index: 1001;
         }
 
         /* About Hero Section */
@@ -365,6 +377,18 @@
             background: var(--text-dark);
             color: white;
             text-align: center;
+            margin-bottom: 0;
+            position: relative;
+        }
+
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .cta-content h2 {
@@ -445,6 +469,35 @@
                 height: 80px;
                 font-size: 2rem;
             }
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, #2d3748, #1a202c);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 0;
+            text-align: center;
+            border-top: 4px solid #ff6b35;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: white;
+            z-index: 11;
+        }
+
+        .footer p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 0.9rem;
         }
     </style>
 </head>

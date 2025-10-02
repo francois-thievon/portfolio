@@ -13,15 +13,25 @@ document.addEventListener('DOMContentLoaded', function() {
         return; // Pas de section hero trouvée
     }
     
-    // Trouver TOUTES les sections après le hero
+    // Trouver TOUTES les sections après le hero, Y COMPRIS LE FOOTER
     const allSectionsAfterHero = [];
+    
+    // D'abord, chercher toutes les sections dans le main après le hero
     let currentElement = heroSection.nextElementSibling;
-    while (currentElement) {
-        if (currentElement.tagName === 'SECTION' || currentElement.tagName === 'MAIN' || currentElement.tagName === 'FOOTER') {
+    while (currentElement && currentElement.parentElement === heroSection.parentElement) {
+        if (currentElement.tagName === 'SECTION') {
             allSectionsAfterHero.push(currentElement);
         }
         currentElement = currentElement.nextElementSibling;
     }
+    
+    // Ensuite, chercher le footer qui est typiquement après le main
+    const footer = document.querySelector('.footer, footer');
+    if (footer) {
+        allSectionsAfterHero.push(footer);
+    }
+    
+    console.log('Éléments trouvés pour décalage:', allSectionsAfterHero.length, allSectionsAfterHero);
     
     // Configuration des tailles
     const maxHeight = window.innerHeight * 0.6; // 60vh en pixels
@@ -45,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Appliquer la hauteur calculée
         heroSection.style.minHeight = `${currentHeight}px`;
         
-        // LOGIQUE SIMPLE ET CORRECTE : Appliquer l'offset à TOUTES les sections
+        // LOGIQUE SIMPLE ET CORRECTE : Appliquer l'offset à TOUTES les sections (Y COMPRIS footer)
         if (allSectionsAfterHero.length > 0) {
             if (scrollProgress < 1) {
                 // Phase 1 : Bandeau en cours de rétrécissement
@@ -63,6 +73,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     section.style.transition = 'none';
                 });
             }
+        }
+        
+        // FORCER le décalage du footer même s'il n'est pas dans la liste
+        const footer = document.querySelector('.footer, footer');
+        if (footer) {
+            if (scrollProgress < 1) {
+                footer.style.transform = `translateY(${scrollY}px)`;
+            } else {
+                const constantCompensation = totalReduction * 0.9;
+                footer.style.transform = `translateY(${constantCompensation}px)`;
+            }
+            footer.style.transition = 'none';
         }
         
         // Gérer les styles du contenu en fonction du progress

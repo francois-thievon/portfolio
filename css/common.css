@@ -349,6 +349,22 @@ p {
     }
 }
 
+/* Footer Styles */
+.footer {
+    background: linear-gradient(135deg, var(--text-dark), #1a202c);
+    color: white;
+    padding: 2rem 0;
+    margin-top: 3rem;
+    text-align: center;
+    border-top: 3px solid var(--primary-color);
+}
+
+.footer p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.9rem;
+}
+
 @media (max-width: 480px) {
     .page-hero h1 {
         font-size: 2rem;
@@ -360,5 +376,10 @@ p {
 
     .floating-bubbles span:nth-child(n+5) {
         display: none;
+    }
+    
+    .footer {
+        padding: 1.5rem 0;
+        margin-top: 2rem;
     }
 }
