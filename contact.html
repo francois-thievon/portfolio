@@ -596,6 +596,9 @@
                             <i class="fas fa-paper-plane"></i>
                             Envoyer le message
                         </button>
+                        
+                        <!-- Zone de statut du formulaire -->
+                        <div id="form-status" class="form-status" style="display: none;"></div>
                     </form>
                 </div>
             </div>
@@ -741,5 +744,11 @@
             });
         });
     </script>
+    
+    <!-- EmailJS pour l'envoi d'emails -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <!-- Script de gestion du formulaire de contact -->
+    <script src="js/contact-form.js"></script>
 </body>
 </html>
