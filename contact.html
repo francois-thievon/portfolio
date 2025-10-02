@@ -113,49 +113,58 @@
 
         /* Contact Info */
         .contact-info {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: white;
             padding: 3rem;
             border-radius: 20px;
-            color: white;
+            color: var(--text-dark);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border: 1px solid transparent;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(255, 107, 53, 1);
+            min-height: 880px;
+            max-height: 880px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .contact-info h2 {
             font-size: 2rem;
             margin-bottom: 1.5rem;
-            color: white;
+            color: var(--text-dark);
         }
 
         .contact-info p {
             font-size: 1.1rem;
             line-height: 1.6;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+            margin-bottom: 3rem;
+            color: var(--text-light);
         }
 
         .contact-details {
             list-style: none;
             padding: 0;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
         .contact-details li {
             display: flex;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             font-size: 1.1rem;
+            color: var(--text-light);
         }
 
         .contact-details i {
             width: 50px;
             height: 50px;
-            background: rgba(255, 255, 255, 0.2);
+            background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 1rem;
             font-size: 1.2rem;
+            color: white;
         }
 
         .social-links {
@@ -170,7 +179,7 @@
             justify-content: center;
             width: 50px;
             height: 50px;
-            background: rgba(255, 255, 255, 0.2);
+            background: var(--gradient-primary);
             border-radius: 50%;
             color: white;
             text-decoration: none;
@@ -179,9 +188,8 @@
         }
 
         .social-links .social-link:hover {
-            background: white;
-            color: var(--primary-color);
             transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
         }
 
         /* Contact Form */
@@ -189,7 +197,11 @@
             background: white;
             padding: 3rem;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(255, 107, 53, 1);
+            min-height: 880px;
+            max-height: 880px;
+            display: flex;
+            flex-direction: column;
         }
 
         .contact-form h2 {
