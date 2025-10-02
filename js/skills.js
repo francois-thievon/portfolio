@@ -5,6 +5,42 @@ document.addEventListener('DOMContentLoaded', function() {
     function initSkillTooltips() {
         const interactiveSkills = document.querySelectorAll('.interactive-skill');
         
+        // Fonction pour détecter si un tooltip doit être affiché au-dessus
+        function shouldShowTooltipAbove(skill) {
+            const skillRect = skill.getBoundingClientRect();
+            const skillCategory = skill.closest('.skill-category');
+            const skillCategoryRect = skillCategory.getBoundingClientRect();
+            
+            // Distance disponible en dessous de la compétence jusqu'au bas du bloc
+            const spaceBelow = skillCategoryRect.bottom - skillRect.bottom;
+            
+            // Hauteur estimée du tooltip (environ 150px avec padding et contenu)
+            const tooltipHeight = 150;
+            
+            // Si pas assez d'espace en dessous, afficher au-dessus
+            if (spaceBelow < tooltipHeight) {
+                return true;
+            }
+            
+            // Vérifier aussi s'il y a des blocs de compétences en dessous qui pourraient masquer
+            const allCategories = document.querySelectorAll('.skill-category');
+            const currentCategoryRect = skillCategory.getBoundingClientRect();
+            
+            for (let category of allCategories) {
+                if (category === skillCategory) continue;
+                
+                const categoryRect = category.getBoundingClientRect();
+                const tooltipBottom = skillRect.bottom + tooltipHeight;
+                
+                // Si un autre bloc commence avant la fin du tooltip, afficher au-dessus
+                if (categoryRect.top < tooltipBottom && categoryRect.top > skillRect.bottom) {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+        
         interactiveSkills.forEach(skill => {
             const tooltip = skill.querySelector('.skill-tooltip');
             
@@ -12,6 +48,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Gestion du hover pour desktop
                 skill.addEventListener('mouseenter', function() {
                     if (window.innerWidth > 768) {
+                        // Vérifier si le tooltip doit être affiché au-dessus
+                        tooltip.classList.remove('tooltip-above');
+                        if (shouldShowTooltipAbove(skill)) {
+                            tooltip.classList.add('tooltip-above');
+                        }
+                        
                         tooltip.classList.add('show');
                     }
                 });
@@ -36,6 +78,12 @@ document.addEventListener('DOMContentLoaded', function() {
                             }
                         }
                     });
+                    
+                    // Vérifier si le tooltip doit être affiché au-dessus
+                    tooltip.classList.remove('tooltip-above');
+                    if (shouldShowTooltipAbove(skill)) {
+                        tooltip.classList.add('tooltip-above');
+                    }
                     
                     // Toggle le tooltip actuel
                     tooltip.classList.toggle('show');
@@ -124,6 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Gestion du redimensionnement pour les tooltips
     window.addEventListener('resize', function() {
+        // Fermer tous les tooltips ouverts car les positions peuvent changer
         const tooltips = document.querySelectorAll('.skill-tooltip.show');
         tooltips.forEach(tooltip => {
             tooltip.classList.remove('show');

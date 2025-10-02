@@ -37,7 +37,7 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .skill-category::before {
@@ -72,6 +72,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1rem;
+            overflow: visible;
         }
 
         .skill-item {
@@ -112,7 +113,7 @@
         }
 
         .interactive-skill:hover {
-            z-index: 9999;
+            z-index: 99999;
         }
 
         .skill-tooltip {
@@ -130,10 +131,11 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
-            z-index: 10000;
+            z-index: 100000;
             min-width: 200px;
             max-width: 280px;
             margin-top: 10px;
+            pointer-events: none;
         }
 
         .skill-tooltip::after {
@@ -144,6 +146,21 @@
             transform: translateX(-50%);
             border: 8px solid transparent;
             border-bottom-color: #ff6b35;
+        }
+
+        /* Tooltip au-dessus pour la dernière ligne */
+        .skill-tooltip.tooltip-above {
+            top: auto;
+            bottom: 100%;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .skill-tooltip.tooltip-above::after {
+            bottom: auto;
+            top: 100%;
+            border-bottom-color: transparent;
+            border-top-color: #ff6b35;
         }
 
         .skill-tooltip.show {
