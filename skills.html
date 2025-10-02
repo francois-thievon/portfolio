@@ -108,35 +108,42 @@
         /* Interactive Skills avec Tooltips */
         .interactive-skill {
             position: relative;
+            z-index: 1;
+        }
+
+        .interactive-skill:hover {
+            z-index: 9999;
         }
 
         .skill-tooltip {
             position: absolute;
-            bottom: 100%;
+            top: 100%;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--text-dark);
-            color: white;
+            background: #ffffff;
+            color: var(--text-dark);
             padding: 1rem 1.5rem;
             border-radius: 10px;
+            border: 3px solid;
+            border-image: linear-gradient(135deg, #ff6b35, #e91e63, #9c27b0) 1;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
-            z-index: 1000;
+            z-index: 10000;
             min-width: 200px;
             max-width: 280px;
-            margin-bottom: 10px;
+            margin-top: 10px;
         }
 
         .skill-tooltip::after {
             content: '';
             position: absolute;
-            top: 100%;
+            bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
             border: 8px solid transparent;
-            border-top-color: var(--text-dark);
+            border-bottom-color: #ff6b35;
         }
 
         .skill-tooltip.show {
@@ -152,7 +159,7 @@
 
         .skill-tooltip li {
             padding: 0.3rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             font-size: 0.9rem;
         }
 

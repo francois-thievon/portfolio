@@ -1044,8 +1044,9 @@ section {
     top: 100%;
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    background: var(--white);
-    border: 2px solid var(--primary-color);
+    background: #ffffff !important;
+    border: 3px solid;
+    border-image: linear-gradient(135deg, #ff6b35, #e91e63, #9c27b0) 1;
     border-radius: 10px;
     padding: 1rem;
     min-width: 160px;
@@ -1099,7 +1100,7 @@ section {
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--primary-color);
+    border-bottom: 8px solid #ff6b35;
 }
 
 /* Amélioration du z-index pour éviter les superpositions */
