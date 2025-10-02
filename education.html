@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Éducation - François Thievon | Data Scientist</title>
+    <title>Éducat        .timeline-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            height: 65px;
+            width: auto;
+            z-index: 2;
+        }ançois Thievon | Data Scientist</title>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/navigation.css">
     <link rel="stylesheet" href="css/animations.css">
@@ -128,12 +135,16 @@
         }
 
         .timeline-item {
-            padding: 2rem 0;
+            padding: 0.5rem 0;
             position: relative;
             width: 50%;
             opacity: 0;
             transform: translateY(50px);
             transition: all 0.6s ease;
+        }
+
+        .timeline-item:nth-child(n+2) {
+            margin-top: -7rem;
         }
 
         .timeline-item.fade-in {
@@ -156,6 +167,15 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             position: relative;
             transition: all 0.3s ease;
+        }
+
+        .timeline-logo {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            height: 80px;
+            width: auto;
+            z-index: 10;
         }
 
         .timeline-content:hover {
@@ -479,6 +499,9 @@
                 <a href="#" class="social-link" title="Téléphone" onclick="showContactPopup('phone'); return false;">
                     <i class="fas fa-phone"></i>
                 </a>
+                <a href="./assets/CV.pdf" target="_blank" class="social-link" title="Mon CV">
+                    <i class="fas fa-file-pdf"></i>
+                </a>
             </div>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -530,9 +553,10 @@
                     <!-- Timeline Item 1 -->
                     <div class="timeline-item">
                         <div class="timeline-content">
+                            <img src="assets/LogoCS.png" alt="CentraleSupélec Logo" class="timeline-logo">
                             <div class="timeline-date">2025 - 2026</div>
                             <h3 class="timeline-title">
-                                CentraleSupélec<img src="assets/LogoCS.png" alt="CentraleSupélec Logo" style="height: 60px; margin-left: 80px;">
+                                CentraleSupélec
                             </h3>
                             <div class="timeline-institution">Metz, France</div>
                             <p class="timeline-description">
@@ -549,9 +573,10 @@
                     <!-- Timeline Item 2 -->
                     <div class="timeline-item">
                         <div class="timeline-content">
+                            <img src="assets/LogoEPF.png" alt="EPF Engineering School Logo" class="timeline-logo">
                             <div class="timeline-date">2025</div>
                             <h3 class="timeline-title">
-                                EPF Engineering School<img src="assets/LogoEPF.png" alt="EPF Engineering School Logo" style="height: 60px; margin-left: 80px;">
+                                EPF Engineering School
                             </h3>
                             <div class="timeline-institution">Montpellier, France</div>
                             <p class="timeline-description">
@@ -567,9 +592,10 @@
                     <!-- Timeline Item 3 -->
                     <div class="timeline-item">
                         <div class="timeline-content">
+                            <img src="assets/LogoLaval.png" alt="Université Laval Logo" class="timeline-logo">
                             <div class="timeline-date">2024</div>
                             <h3 class="timeline-title">
-                                Université Laval<img src="assets/LogoLaval.png" alt="Université Laval Logo" style="height: 60px; margin-left: 80px;">
+                                Université Laval
                             </h3>
                             <div class="timeline-institution">Québec, Canada</div>
                             <p class="timeline-description">
@@ -584,9 +610,10 @@
                     <!-- Timeline Item 4 -->
                     <div class="timeline-item">
                         <div class="timeline-content">
+                            <img src="assets/LogoEPF.png" alt="EPF Engineering School Logo" class="timeline-logo">
                             <div class="timeline-date">2021-2024</div>
                             <h3 class="timeline-title">
-                                EPF Engineering School<img src="assets/LogoEPF.png" alt="EPF Engineering School Logo" style="height: 60px; margin-left: 80px;">
+                                EPF Engineering School
                             </h3>
                             <div class="timeline-institution">Montpellier, France</div>
                             <p class="timeline-description">
@@ -602,9 +629,10 @@
                     <!-- Timeline Item 5 -->
                     <div class="timeline-item">
                         <div class="timeline-content">
+                            <img src="assets/LogoNevers.png" alt="Lycée Nevers Logo" class="timeline-logo">
                             <div class="timeline-date">2018-2021</div>
                             <h3 class="timeline-title">
-                                Lycée Nevers<img src="assets/LogoNevers.png" alt="Lycée Nevers Logo" style="height: 60px; margin-left: 80px;">
+                                Lycée Nevers
                             </h3>
                             <div class="timeline-institution">Montpellier, France</div>
                             <p class="timeline-description">
