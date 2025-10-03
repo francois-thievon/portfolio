@@ -3,14 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Éducat        .timeline-logo {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            height: 65px;
-            width: auto;
-            z-index: 2;
-        }ançois Thievon | Data Scientist</title>
+    <title>Éducation - Fançois Thievon</title>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/navigation.css">
     <link rel="stylesheet" href="css/animations.css">
@@ -340,6 +333,93 @@
             transform: translateY(-10px);
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
             border-color: var(--primary-color);
+        }
+
+        /* Styles YouTube Cards */
+        .yt-card {
+            display: block;
+            width: 100%;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin: 0;
+            overflow: hidden;
+            font-family: system-ui, sans-serif;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .yt-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary-color);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .yt-thumb {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .yt-overlay {
+            position: relative;
+            margin-top: -2.6rem;
+            height: 0;
+            display: flex;
+            justify-content: center;
+            pointer-events: none;
+            font-size: 2rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 0, 0, .8);
+        }
+
+        .yt-content {
+            padding: 1.5rem;
+        }
+
+        .yt-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .yt-issuer {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .yt-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .yt-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1rem;
+        }
+
+        .yt-badge {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
         .cert-icon {
@@ -714,89 +794,83 @@
                 </div>
 
                 <div class="certifications-grid">
-                    <div class="certification-card fade-in">
-                        <div class="cert-icon">
-                            <i class="fas fa-brain"></i>
+                    <a class="yt-card fade-in" href="https://www.youtube.com/playlist?list=PLO_fdPEVlfKoanjvTJbIbd9V5d9Pzp8Rw" target="_blank" rel="noopener" aria-label="Ouvrir la playlist Deep Learning">
+                        <img class="yt-thumb" src="https://i.ytimg.com/vi/XUFLq6dKQok/hqdefault.jpg" alt="Formation Deep Learning – miniature">
+                        <div class="yt-content">
+                            <h3 class="yt-title">Formation au Deep Learning</h3>
+                            <div class="yt-issuer">by Machine Learnia</div>
+                            <p class="yt-description">Formation complète sur le Deep Learning : réseaux de neurones, CNN, RNN, et applications pratiques avec TensorFlow et Keras.</p>
+                            <div class="yt-stats">
+                                <span>🎥 Playlist complète</span>
+                                <span class="yt-badge">Deep Learning</span>
+                            </div>
                         </div>
-                        <h3 class="cert-title">Formation au Deep Learning</h3>
-                        <div class="cert-issuer">by Machine Learnia</div>
-                        <div class="cert-date">Formation complète</div>
-                        <span class="cert-badge">
-                            <a href="https://www.youtube.com/playlist?list=PLO_fdPEVlfKoanjvTJbIbd9V5d9Pzp8Rw" target="_blank" style="color: white; text-decoration: none;">
-                                Voir la playlist
-                            </a>
-                        </span>
-                    </div>
+                    </a>
 
-                    <div class="certification-card fade-in">
-                        <div class="cert-icon">
-                            <i class="fas fa-robot"></i>
+                    <a class="yt-card fade-in" href="https://www.youtube.com/playlist?list=PLO_fdPEVlfKqMDNmCFzQISI2H_nJcEDJq" target="_blank" rel="noopener" aria-label="Ouvrir la playlist Machine Learning">
+                        <img class="yt-thumb" src="https://i.ytimg.com/vi/82KLS2C_gNQ/hqdefault.jpg" alt="Formation Machine Learning – miniature">
+                        <div class="yt-content">
+                            <h3 class="yt-title">Formation au Machine Learning</h3>
+                            <div class="yt-issuer">by Machine Learnia</div>
+                            <p class="yt-description">Cours complet sur le Machine Learning : algorithmes supervisés et non-supervisés, scikit-learn, et mise en pratique sur des projets réels.</p>
+                            <div class="yt-stats">
+                                <span>🎥 Playlist complète</span>
+                                <span class="yt-badge">ML</span>
+                            </div>
                         </div>
-                        <h3 class="cert-title">Formation au Machine Learning</h3>
-                        <div class="cert-issuer">by Machine Learnia</div>
-                        <div class="cert-date">Formation complète</div>
-                        <span class="cert-badge">
-                            <a href="https://www.youtube.com/playlist?list=PLO_fdPEVlfKqMDNmCFzQISI2H_nJcEDJq" target="_blank" style="color: white; text-decoration: none;">
-                                Voir la playlist
-                            </a>
-                        </span>
-                    </div>
+                    </a>
 
-                    <div class="certification-card fade-in">
-                        <div class="cert-icon">
-                            <i class="fas fa-graduation-cap"></i>
+                    <a class="yt-card fade-in" href="https://www.youtube.com/playlist?list=PLO_fdPEVlfKqUF5BPKjGSh7aV9aBshrpY" target="_blank" rel="noopener" aria-label="Ouvrir la playlist Initiation ML">
+                        <img class="yt-thumb" src="https://i.ytimg.com/vi/EUD07IiviJg/hqdefault.jpg" alt="Initiation Machine Learning – miniature">
+                        <div class="yt-content">
+                            <h3 class="yt-title">Initiation au Machine Learning</h3>
+                            <div class="yt-issuer">by Machine Learnia</div>
+                            <p class="yt-description">Introduction accessible au Machine Learning pour débutants : concepts fondamentaux, premiers algorithmes et exemples pratiques.</p>
+                            <div class="yt-stats">
+                                <span>🎥 Formation d'initiation</span>
+                                <span class="yt-badge">Débutant</span>
+                            </div>
                         </div>
-                        <h3 class="cert-title">Initiation au Machine Learning</h3>
-                        <div class="cert-issuer">by Machine Learnia</div>
-                        <div class="cert-date">Formation d'initiation</div>
-                        <span class="cert-badge">
-                            <a href="https://www.youtube.com/playlist?list=PLO_fdPEVlfKqUF5BPKjGSh7aV9aBshrpY" target="_blank" style="color: white; text-decoration: none;">
-                                Voir la playlist
-                            </a>
-                        </span>
-                    </div>
+                    </a>
 
-                    <div class="certification-card fade-in">
-                        <div class="cert-icon">
-                            <i class="fab fa-python"></i>
+                    <a class="yt-card fade-in" href="https://www.youtube.com/playlist?list=PLrSOXFDHBtfHg8fWBd7sKPxEmahwyVBkC" target="_blank" rel="noopener" aria-label="Ouvrir la playlist Python">
+                        <img class="yt-thumb" src="https://i.ytimg.com/vi/HWxBtxPBCAc/hqdefault.jpg" alt="Cours Python – miniature">
+                        <div class="yt-content">
+                            <h3 class="yt-title">Cours Python</h3>
+                            <div class="yt-issuer">by EvoluNoob</div>
+                            <p class="yt-description">Formation complète en Python : syntaxe, structures de données, programmation orientée objet, et développement d'applications.</p>
+                            <div class="yt-stats">
+                                <span>🎥 Cours complet</span>
+                                <span class="yt-badge">Python</span>
+                            </div>
                         </div>
-                        <h3 class="cert-title">Cours Python</h3>
-                        <div class="cert-issuer">by EvoluNoob</div>
-                        <div class="cert-date">Formation complète</div>
-                        <span class="cert-badge">
-                            <a href="https://www.youtube.com/playlist?list=PLrSOXFDHBtfHg8fWBd7sKPxEmahwyVBkC" target="_blank" style="color: white; text-decoration: none;">
-                                Voir la playlist
-                            </a>
-                        </span>
-                    </div>
+                    </a>
 
-                    <div class="certification-card fade-in">
-                        <div class="cert-icon">
-                            <i class="fas fa-code"></i>
+                    <a class="yt-card fade-in" href="https://www.youtube.com/playlist?list=PLrSOXFDHBtfFKOzlm5iCBeXDTLxXdmxpx" target="_blank" rel="noopener" aria-label="Ouvrir la playlist C++">
+                        <img class="yt-thumb" src="https://i.ytimg.com/vi/f3UVQPbw32w/hqdefault.jpg" alt="Cours C++ – miniature">
+                        <div class="yt-content">
+                            <h3 class="yt-title">Cours C++</h3>
+                            <div class="yt-issuer">by EvoluNoob</div>
+                            <p class="yt-description">Apprentissage du C++ de A à Z : syntaxe, gestion mémoire, programmation orientée objet, et bonnes pratiques de développement.</p>
+                            <div class="yt-stats">
+                                <span>🎥 Cours complet</span>
+                                <span class="yt-badge">C++</span>
+                            </div>
                         </div>
-                        <h3 class="cert-title">Cours C++</h3>
-                        <div class="cert-issuer">by EvoluNoob</div>
-                        <div class="cert-date">Formation complète</div>
-                        <span class="cert-badge">
-                            <a href="https://www.youtube.com/playlist?list=PLrSOXFDHBtfFKOzlm5iCBeXDTLxXdmxpx" target="_blank" style="color: white; text-decoration: none;">
-                                Voir la playlist
-                            </a>
-                        </span>
-                    </div>
+                    </a>
 
-                    <div class="certification-card fade-in">
-                        <div class="cert-icon">
-                            <i class="fab fa-html5"></i>
+                    <a class="yt-card fade-in" href="https://www.youtube.com/playlist?list=PLrSOXFDHBtfE5tpw0bjMevWxMWXotiSdO" target="_blank" rel="noopener" aria-label="Ouvrir la playlist HTML/CSS">
+                        <img class="yt-thumb" src="https://i.ytimg.com/vi/u5W2NWItytc/hqdefault.jpg" alt="Cours HTML/CSS – miniature">
+                        <div class="yt-content">
+                            <h3 class="yt-title">Cours HTML/CSS</h3>
+                            <div class="yt-issuer">by EvoluNoob</div>
+                            <p class="yt-description">Formation au développement web front-end : HTML5, CSS3, design responsive, et création de sites web modernes.</p>
+                            <div class="yt-stats">
+                                <span>🎥 Cours complet</span>
+                                <span class="yt-badge">Web</span>
+                            </div>
                         </div>
-                        <h3 class="cert-title">Cours HTML/CSS</h3>
-                        <div class="cert-issuer">by EvoluNoob</div>
-                        <div class="cert-date">Formation complète</div>
-                        <span class="cert-badge">
-                            <a href="https://www.youtube.com/playlist?list=PLrSOXFDHBtfE5tpw0bjMevWxMWXotiSdO" target="_blank" style="color: white; text-decoration: none;">
-                                Voir la playlist
-                            </a>
-                        </span>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
