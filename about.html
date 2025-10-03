@@ -471,6 +471,248 @@
             }
         }
 
+        /* Passions Section */
+        .passions-section {
+            padding: 5rem 0 3rem 0;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+
+        /* Sport Section */
+        .sport-passion-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Anime Section */
+        .anime-passion-section {
+            padding: 6rem 0;
+            background-image: url('./assets/WallpaperGojovsSukuna.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .anime-passion-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .anime-passion-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .passion-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .passion-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            font-size: 1.8rem;
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .anime-icon {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .passion-header h3 {
+            font-size: 3rem;
+            color: white;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .passion-intro {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.3rem;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 4rem auto;
+        }
+
+        .anime-text strong {
+            color: #fff;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+        }
+
+        .sports-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+            max-width: 1000px;
+            margin: 2rem auto 0;
+        }
+
+        .sport-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem 1rem;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .sport-item:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .sport-name {
+            font-weight: 600;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .sport-duration {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .anime-videos {
+            margin-top: 3rem;
+        }
+
+        .anime-videos h4 {
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-card iframe {
+            width: 100%;
+            height: 220px;
+            border: none;
+            border-radius: 15px;
+        }
+
+        /* Responsive pour les passions */
+        @media (max-width: 1024px) {
+            .sports-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sports-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .videos-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .passion-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .passion-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            .anime-passion-section {
+                background-attachment: scroll;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sports-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .passion-header h3 {
+                font-size: 2rem;
+            }
+
+            .video-card iframe {
+                height: 180px;
+            }
+        }
+
         /* Footer Styles */
         .footer {
             background: linear-gradient(135deg, #2d3748, #1a202c);
@@ -683,6 +925,119 @@
                             Travail en équipe et communication transparente pour créer des solutions 
                             qui répondent véritablement aux besoins des utilisateurs finaux.
                         </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Passions Section -->
+        <section class="passions-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Mes autres passions</h2>
+                    <p>Découvrez ce qui m'anime en dehors du code et des données</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Passion Sport Section -->
+        <section class="sport-passion-section">
+            <div class="container">
+                <div class="passion-header">
+                    <div class="passion-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Le Sport</h3>
+                </div>
+                <p class="passion-intro">
+                    Le sport a toujours fait partie intégrante de ma vie. Cette passion m'a appris la discipline, 
+                    la persévérance et le dépassement de soi - des qualités essentielles dans ma carrière de data scientist.
+                </p>
+                <div class="sports-grid">
+                    <div class="sport-item">
+                        <span class="sport-name">Judo</span>
+                        <span class="sport-duration">15 ans</span>
+                    </div>
+                    <div class="sport-item">
+                        <span class="sport-name">Tennis</span>
+                        <span class="sport-duration">8 ans</span>
+                    </div>
+                    <div class="sport-item">
+                        <span class="sport-name">Rugby</span>
+                        <span class="sport-duration">6 ans</span>
+                    </div>
+                    <div class="sport-item">
+                        <span class="sport-name">Athlétisme</span>
+                        <span class="sport-duration">4 ans</span>
+                    </div>
+                    <div class="sport-item">
+                        <span class="sport-name">Musculation</span>
+                        <span class="sport-duration">3 ans</span>
+                    </div>
+                    <div class="sport-item">
+                        <span class="sport-name">Crossfit</span>
+                        <span class="sport-duration">2 ans + compét.</span>
+                    </div>
+                    <div class="sport-item">
+                        <span class="sport-name">Boxe anglaise</span>
+                        <span class="sport-duration">1 an</span>
+                    </div>
+                    <div class="sport-item">
+                        <span class="sport-name">Kick boxing</span>
+                        <span class="sport-duration">1 an</span>
+                    </div>
+                    <div class="sport-item">
+                        <span class="sport-name">MMA</span>
+                        <span class="sport-duration">1 an</span>
+                    </div>
+                    <div class="sport-item">
+                        <span class="sport-name">Bras de fer</span>
+                        <span class="sport-duration">1 an</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Passion Animés Section -->
+        <section class="anime-passion-section">
+            <div class="container">
+                <div class="passion-header">
+                    <div class="passion-icon anime-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h3>Les Animés</h3>
+                </div>
+                <p class="passion-intro anime-text">
+                    Fan d'animés depuis l'enfance, je suis passionné par cet art narratif unique. 
+                    Grand amateur de <strong>Jojo's Bizarre Adventure</strong>, <strong>Naruto</strong>, 
+                    <strong>Hunter x Hunter</strong>, <strong>Jujutsu Kaisen</strong>, <strong>One Piece</strong> 
+                    et bien d'autres œuvres qui m'inspirent par leur créativité et leurs messages profonds.
+                </p>
+                
+                <div class="anime-videos">
+                    <h4>Quelques édits que j'adore</h4>
+                    <div class="videos-grid">
+                        <div class="video-card">
+                            <iframe src="https://www.youtube.com/embed/4IzAIE3sqzs?hd=1" 
+                                    title="Anime Edit 1" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-card">
+                            <iframe src="https://www.youtube.com/embed/2OxaFKuHUkc?hd=1" 
+                                    title="Anime Edit 2" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-card">
+                            <iframe src="https://www.youtube.com/embed/RTo8JjSx6gU?hd=1" 
+                                    title="Anime Edit 3" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
                     </div>
                 </div>
             </div>
