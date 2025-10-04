@@ -637,34 +637,105 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
-        .videos-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            max-width: 1200px;
+        /* Video Carousel */
+        .video-carousel {
+            position: relative;
+            width: 100% !important;
+            max-width: 95vw !important; /* Plus large que 1200px */
             margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
-        .video-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            overflow: hidden;
+        .video-container {
+            /* CSS neutralisé - utilise uniquement le style inline */
+            position: relative;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .video-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none; /* Désactive les clics quand invisible */
+            z-index: 1;
+        }
+
+        .video-slide.active {
+            opacity: 1;
+            pointer-events: auto; /* Réactive les clics pour la vidéo active */
+            z-index: 2;
+        }
+
+        .video-slide iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+        }
+
+        .carousel-btn {
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50% !important;
+            width: 60px !important;
+            height: 60px !important;
+            min-width: 60px !important;
+            min-height: 60px !important;
+            max-width: 60px !important;
+            max-height: 60px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1.5rem;
+            z-index: 10;
+            flex-shrink: 0 !important;
+            box-sizing: border-box !important;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .video-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        .indicator.active {
+            background: white;
+            transform: scale(1.2);
         }
 
-        .video-card iframe {
-            width: 100%;
-            height: 220px;
-            border: none;
-            border-radius: 15px;
+        .indicator:hover {
+            background: rgba(255, 255, 255, 0.7);
         }
 
         /* Responsive pour les passions */
@@ -679,9 +750,21 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .videos-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
+            .video-carousel {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .video-container {
+                width: 95vw !important; /* Largeur fixe mobile */
+                height: 50vh !important;
+                max-width: 800px !important; /* Largeur maximum mobile */
+            }
+
+            .carousel-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
             }
 
             .passion-header {
@@ -1016,27 +1099,64 @@
                 
                 <div class="anime-videos">
                     <h4>Quelques édits que j'adore</h4>
-                    <div class="videos-grid">
-                        <div class="video-card">
-                            <iframe src="https://www.youtube.com/embed/4IzAIE3sqzs?hd=1" 
-                                    title="Anime Edit 1" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                            </iframe>
+                    <div class="video-carousel" style="max-width: 95vw !important; width: 100% !important;">
+                        <button class="carousel-btn prev-btn" onclick="previousVideo()">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        
+                        <div class="video-container" style="width: 1067px !important; height: 600px !important; max-width: 1067px !important; min-width: 1067px !important; margin: 0 auto !important; overflow: visible !important; position: relative !important; box-sizing: border-box !important; border: none !important;">
+                            <div class="video-slide active">
+                                <iframe src="https://www.youtube.com/embed/RTo8JjSx6gU?hd=1" 
+                                        title="Anime Edit 1" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                        allowfullscreen
+                                        style="width: 1067px !important; height: 600px !important; position: absolute !important; top: 0 !important; left: 0px !important; box-sizing: border-box !important; border: none !important;">
+                                </iframe>
+                            </div>
+                            <div class="video-slide">
+                                <iframe src="https://www.youtube.com/embed/2OxaFKuHUkc?hd=1" 
+                                        title="Anime Edit 2" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen
+                                        style="width: 1067px !important; height: 600px !important; position: absolute !important; top: 0 !important; left: 0px !important; box-sizing: border-box !important; border: none !important;">
+                                </iframe>
+                            </div>
+                            <div class="video-slide">
+                                <iframe src="https://www.youtube.com/embed/RTo8JjSx6gU?hd=1" 
+                                        title="Anime Edit 3" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen
+                                        style="width: 1067px !important; height: 600px !important; position: absolute !important; top: 0 !important; left: 0px !important; box-sizing: border-box !important; border: none !important;">
+                                </iframe>
+                            </div>
+                            <div class="video-slide">
+                                <iframe src="https://www.youtube.com/embed/GluLi8W8mEI?hd=1" 
+                                        title="Anime Edit 4" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen
+                                        style="width: 1067px !important; height: 600px !important; position: absolute !important; top: 0 !important; left: 0px !important; box-sizing: border-box !important; border: none !important;">
+                                </iframe>
+                            </div>
+                            <div class="video-slide">
+                                <iframe src="https://www.youtube.com/embed/-cQ6hKNdzvE?hd=1" 
+                                        title="Anime Edit 5" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen
+                                        style="width: 1067px !important; height: 600px !important; position: absolute !important; top: 0 !important; left: 0px !important; box-sizing: border-box !important; border: none !important;">
+                                </iframe>
+                            </div>
                         </div>
-                        <div class="video-card">
-                            <iframe src="https://www.youtube.com/embed/2OxaFKuHUkc?hd=1" 
-                                    title="Anime Edit 2" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                            </iframe>
-                        </div>
-                        <div class="video-card">
-                            <iframe src="https://www.youtube.com/embed/RTo8JjSx6gU?hd=1" 
-                                    title="Anime Edit 3" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                            </iframe>
+                        
+                        <button class="carousel-btn next-btn" onclick="nextVideo()">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        
+                        <div class="carousel-indicators">
+                            <span class="indicator active" onclick="currentVideo(1)"></span>
+                            <span class="indicator" onclick="currentVideo(2)"></span>
+                            <span class="indicator" onclick="currentVideo(3)"></span>
+                            <span class="indicator" onclick="currentVideo(4)"></span>
+                            <span class="indicator" onclick="currentVideo(5)"></span>
                         </div>
                     </div>
                 </div>
@@ -1057,5 +1177,59 @@
     <script src="js/animation-sync.js"></script>
     <script src="js/sticky-hero.js"></script>
     <script src="js/contact-popup.js"></script>
+    
+    <script>
+        // Carrousel de vidéos
+        let currentVideoIndex = 0;
+        const videoSlides = document.querySelectorAll('.video-slide');
+        const indicators = document.querySelectorAll('.indicator');
+
+        function showVideo(index) {
+            // Mettre en pause toutes les vidéos avant de changer
+            videoSlides.forEach(slide => {
+                const iframe = slide.querySelector('iframe');
+                if (iframe) {
+                    // Recharger l'iframe pour arrêter la vidéo (méthode simple et efficace)
+                    const src = iframe.src;
+                    iframe.src = '';
+                    iframe.src = src;
+                }
+                slide.classList.remove('active');
+            });
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            // Afficher la vidéo sélectionnée
+            videoSlides[index].classList.add('active');
+            indicators[index].classList.add('active');
+            
+            currentVideoIndex = index;
+        }
+
+        function nextVideo() {
+            const nextIndex = (currentVideoIndex + 1) % videoSlides.length;
+            showVideo(nextIndex);
+        }
+
+        function previousVideo() {
+            const prevIndex = (currentVideoIndex - 1 + videoSlides.length) % videoSlides.length;
+            showVideo(prevIndex);
+        }
+
+        function currentVideo(index) {
+            showVideo(index - 1); // -1 car les indicateurs commencent à 1
+        }
+
+        // Navigation au clavier
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                previousVideo();
+            } else if (e.key === 'ArrowRight') {
+                nextVideo();
+            }
+        });
+
+        // Auto-play optionnel (décommenté si souhaité)
+        // setInterval(nextVideo, 10000); // Change de vidéo toutes les 10 secondes
+    </script>
 </body>
 </html>
