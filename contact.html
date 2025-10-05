@@ -105,90 +105,8 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            display: block;
             align-items: start;
-        }
-
-        /* Contact Info */
-        .contact-info {
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            color: var(--text-dark);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            border: 1px solid transparent;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(255, 107, 53, 1);
-            min-height: 880px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .contact-info h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-dark);
-        }
-
-        .contact-info p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 3rem;
-            color: var(--text-light);
-        }
-
-        .contact-details {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 3rem;
-        }
-
-        .contact-details li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-            color: var(--text-light);
-        }
-
-        .contact-details i {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 1rem;
-            font-size: 1.2rem;
-            color: white;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .social-links .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-links .social-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
         }
 
         /* Contact Form */
@@ -197,7 +115,8 @@
             padding: 3rem;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(255, 107, 53, 1);
-            min-height: 880px;
+            width: 100%;
+            max-width: 100%;
             display: flex;
             flex-direction: column;
         }
@@ -366,12 +285,6 @@
                 font-size: 1.1rem;
             }
 
-            .contact-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .contact-info,
             .contact-form {
                 padding: 2rem;
             }
@@ -390,7 +303,6 @@
                 font-size: 2rem;
             }
 
-            .contact-info,
             .contact-form {
                 padding: 1.5rem;
             }
@@ -508,68 +420,16 @@
         <!-- Contact Content -->
         <section class="contact-content">
             <div class="contact-container">
-                <!-- Contact Info -->
-                <div class="contact-info fade-in">
-                    <h2>Parlons de votre projet</h2>
-                    <p>
-                        Je suis toujours enthousiaste à l'idée de découvrir de nouveaux défis en data science. 
-                        Que ce soit pour un projet, une collaboration ou simplement pour échanger sur l'IA, 
-                        n'hésitez pas à me contacter !
-                    </p>
-
-                    <ul class="contact-details">
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <strong>Email</strong><br>
-                                thievon.francois@gmail.com
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <strong>Téléphone</strong><br>
-                                +33 7 81 44 22 28
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <strong>Localisation</strong><br>
-                                Montpellier, France
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <strong>Disponibilité</strong><br>
-                                Lun - Ven, 9h - 18h
-                            </div>
-                        </li>
-                    </ul>
-
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/francois-thievon-19b8692a1/" target="_blank" class="social-link" title="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://github.com/francois-thievon" target="_blank" class="social-link" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="mailto:francois.thievon@email.com" class="social-link" title="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="tel:+33612345678" class="social-link" title="Téléphone">
-                            <i class="fas fa-phone"></i>
-                        </a>
-                    </div>
-                </div>
-
                 <!-- Contact Form -->
                 <div class="contact-form fade-in">
                     <h2>Envoyez-moi un message</h2>
-                    
+                    <p>
+                        Je suis toujours enthousiaste à l'idée de découvrir de nouveaux défis en data science. 
+                        Que ce soit pour un projet, une collaboration ou simplement pour échanger, 
+                        n'hésitez pas à me contacter via le formulaire ci-dessous ou via mes coordonnées 
+                        qui sont en haut à droite de la page (LinkedIn, Email et numéro de téléphone) !
+                    </p>
                     <div id="form-status" class="form-status"></div>
-
                     <form id="contact-form">
                         <div class="form-row">
                             <div class="form-group">
@@ -582,14 +442,15 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="email">Email *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="company">Entreprise</label>
-                            <input type="text" id="company" name="company">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="company">Entreprise</label>
+                                <input type="text" id="company" name="company">
+                            </div>
                         </div>
 
                         <div class="form-group">
