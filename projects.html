@@ -381,11 +381,11 @@
             <div class="container">
                 <div class="category-filter">
                     <button class="filter-btn active" data-category="all">Tous</button>
-                    <button class="filter-btn" data-category="ml">Machine Learning</button>
                     <button class="filter-btn" data-category="dl">Deep Learning</button>
-                    <button class="filter-btn" data-category="nlp">NLP</button>
-                    <button class="filter-btn" data-category="cv">Computer Vision</button>
-                    <button class="filter-btn" data-category="analytics">Analytics</button>
+                    <button class="filter-btn" data-category="ml">Machine Learning</button>
+                    <button class="filter-btn" data-category="dataviz">Data Visualisation</button>
+                    <button class="filter-btn" data-category="poo">POO</button>
+                    <button class="filter-btn" data-category="games">Jeux vidéos</button>
                 </div>
             </div>
         </section>
@@ -394,129 +394,118 @@
         <section class="projects-content">
             <div class="projects-grid">
                 <!-- Projet 1 -->
-                <div class="project-card fade-in" data-category="ml analytics">
+                <div class="project-card fade-in" data-category="dl dataviz poo">
                     <div class="project-image">
-                        <i class="fas fa-chart-line"></i>
+                        <i class="fas fa-brain"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Prédiction Prix Immobilier</h3>
-                        <p>Modèle de machine learning pour prédire les prix immobiliers avec une précision de 92%. Analyse de 50k+ propriétés avec features engineering avancé et optimisation d'hyperparamètres.</p>
+                        <h3>Construction Neural Network MLP</h3>
+                        <p>Construction "from scratch" d'un réseau de neurones basique (Multi-Layer Perceptron) dans un Jupyter notebook Python. Nombreuses animations pour visualiser l'apprentissage et l'évolution de la frontière de décision au fil des itérations.</p>
                         <div class="project-tech">
                             <span>Python</span>
-                            <span>Scikit-learn</span>
-                            <span>XGBoost</span>
-                            <span>Pandas</span>
-                            <span>Plotly</span>
+                            <span>NumPy</span>
+                            <span>Matplotlib</span>
+                            <span>Jupyter</span>
+                            <span>POO</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" title="GitHub">
+                            <a href="https://github.com/francois-thievon/Neural_Network" target="_blank" class="project-link" title="GitHub">
                                 <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="project-link" title="Demo">
-                                <i class="fas fa-external-link-alt"></i>
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Projet 2 -->
-                <div class="project-card fade-in" data-category="dl cv">
+                <div class="project-card fade-in" data-category="ml dataviz">
                     <div class="project-image">
-                        <i class="fas fa-eye"></i>
+                        <i class="fas fa-stethoscope"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Classification d'Images Médicales</h3>
-                        <p>CNN pour détecter des anomalies sur radiographies pulmonaires. Déployé en production avec FastAPI et Docker, utilisé par 3 hôpitaux avec 94% de précision.</p>
+                        <h3>Gram'Analytics</h3>
+                        <p>Nettoyage, préprocessing, analyses statistiques et visualisation de données sur une grosse base d'audiogrammes. Entraînement de modèles de prédiction (Random Forest, LightGBM, XGBoost) pour prédire les acouphènes.</p>
                         <div class="project-tech">
-                            <span>TensorFlow</span>
-                            <span>OpenCV</span>
-                            <span>FastAPI</span>
-                            <span>Docker</span>
-                            <span>AWS</span>
+                            <span>Python</span>
+                            <span>Pandas</span>
+                            <span>Random Forest</span>
+                            <span>LightGBM</span>
+                            <span>XGBoost</span>
+                            <span>Matplotlib</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" title="GitHub">
+                            <a href="https://github.com/francois-thievon/GRAM-ANALYTICS" target="_blank" class="project-link" title="GitHub">
                                 <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="project-link" title="Demo">
-                                <i class="fas fa-external-link-alt"></i>
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Projet 3 -->
-                <div class="project-card fade-in" data-category="nlp dl">
+                <div class="project-card fade-in" data-category="poo games">
                     <div class="project-image">
-                        <i class="fas fa-comments"></i>
+                        <i class="fas fa-gamepad"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Analyse de Sentiment Client</h3>
-                        <p>Pipeline NLP temps réel pour analyser les avis clients sur réseaux sociaux. Traitement de 10k+ messages/jour avec alertes automatiques et dashboard interactif.</p>
+                        <h3>JJBA Time Fighters</h3>
+                        <p>Jeu type Street Fighter développé en JavaScript avec Phaser dans CodeSandbox, inspiré de l'univers Jojo's Bizarre Adventure. Système de combat complet avec animations et mécaniques de jeu fluides.</p>
                         <div class="project-tech">
-                            <span>spaCy</span>
-                            <span>BERT</span>
-                            <span>Apache Kafka</span>
-                            <span>Streamlit</span>
-                            <span>Redis</span>
+                            <span>JavaScript</span>
+                            <span>Phaser</span>
+                            <span>CodeSandbox</span>
+                            <span>POO</span>
+                            <span>Game Dev</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" title="GitHub">
+                            <a href="https://github.com/francois-thievon/JJBA_Time_Fighters" target="_blank" class="project-link" title="GitHub">
                                 <i class="fab fa-github"></i>
                             </a>
-                            <a href="#" class="project-link" title="Demo">
-                                <i class="fas fa-external-link-alt"></i>
+                            <a href="https://ej7zrh.csb.app/" target="_blank" class="project-link" title="Jouer">
+                                <i class="fas fa-play"></i>
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Projet 4 -->
-                <div class="project-card fade-in" data-category="ml dl">
+                <div class="project-card fade-in" data-category="dataviz">
                     <div class="project-image">
-                        <i class="fas fa-robot"></i>
+                        <i class="fas fa-chart-bar"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Système de Recommandation</h3>
-                        <p>Moteur de recommandation hybride pour e-commerce avec filtrage collaboratif et deep learning. Augmentation du CA de 23% et amélioration de l'engagement utilisateur.</p>
+                        <h3>DataViz Pokédex</h3>
+                        <p>Programme Python de visualisation de données sur le Pokédex. Affichage de nombreux types de graphiques différents sur une base de données de Pokémons avec leurs statistiques et images. Exploration interactive des données.</p>
                         <div class="project-tech">
-                            <span>PyTorch</span>
-                            <span>Neo4j</span>
-                            <span>Redis</span>
-                            <span>FastAPI</span>
-                            <span>MLflow</span>
+                            <span>Python</span>
+                            <span>Matplotlib</span>
+                            <span>Seaborn</span>
+                            <span>Pandas</span>
+                            <span>Data Viz</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" title="GitHub">
+                            <a href="https://github.com/francois-thievon/Data_Viz_Pokedex" target="_blank" class="project-link" title="GitHub">
                                 <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="project-link" title="Demo">
-                                <i class="fas fa-external-link-alt"></i>
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Projet 5 -->
-                <div class="project-card fade-in" data-category="analytics ml">
+                <div class="project-card fade-in" data-category="poo">
                     <div class="project-image">
-                        <i class="fas fa-chart-pie"></i>
+                        <i class="fas fa-globe"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Dashboard Analytics Avancé</h3>
-                        <p>Plateforme de business intelligence complète avec analyses prédictives, KPIs temps réel et alertes automatiques. Interface responsive pour mobile et desktop.</p>
+                        <h3>Portfolio Website</h3>
+                        <p>Le site web sur lequel vous naviguez actuellement ! Portfolio personnel développé en HTML, CSS et JavaScript avec des animations fluides, design responsive et interface moderne. Présentation complète de mes compétences et projets.</p>
                         <div class="project-tech">
-                            <span>Power BI</span>
-                            <span>Python</span>
-                            <span>SQL Server</span>
-                            <span>DAX</span>
-                            <span>Power Query</span>
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                            <span>Responsive</span>
+                            <span>Animations</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" title="GitHub">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="project-link" title="Demo">
+                            <a href="https://francois-thievon.fr" target="_blank" class="project-link" title="Site Web">
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
                         </div>
@@ -524,78 +513,24 @@
                 </div>
 
                 <!-- Projet 6 -->
-                <div class="project-card fade-in" data-category="ml analytics">
+                <div class="project-card fade-in" data-category="poo">
                     <div class="project-image">
-                        <i class="fas fa-cogs"></i>
+                        <i class="fas fa-mobile-alt"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Prédiction de Maintenance</h3>
-                        <p>Système prédictif pour la maintenance industrielle utilisant l'IoT et le machine learning. Réduction des pannes de 40% et optimisation des coûts de maintenance.</p>
+                        <h3>NumerizeMe</h3>
+                        <p>Conception et développement intégral d'une application mobile avec architecture full stack. Backend en Python avec FastAPI, base de données PostgreSQL en conteneurs Docker, frontend en Dart avec Flutter et déploiement cloud. Projet en cours de développement.</p>
                         <div class="project-tech">
-                            <span>Python</span>
-                            <span>Time Series</span>
-                            <span>IoT</span>
-                            <span>Apache Airflow</span>
-                            <span>Grafana</span>
+                            <span>Flutter</span>
+                            <span>Dart</span>
+                            <span>FastAPI</span>
+                            <span>PostgreSQL</span>
+                            <span>Docker</span>
+                            <span>Cloud</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" title="GitHub">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="project-link" title="Demo">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Projet 7 -->
-                <div class="project-card fade-in" data-category="cv dl">
-                    <div class="project-image">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Détection d'Objets Temps Réel</h3>
-                        <p>Application de computer vision pour la détection et classification d'objets en temps réel. Optimisée pour fonctionner sur edge devices avec YOLO et TensorRT.</p>
-                        <div class="project-tech">
-                            <span>YOLO</span>
-                            <span>TensorRT</span>
-                            <span>OpenCV</span>
-                            <span>CUDA</span>
-                            <span>Flask</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link" title="GitHub">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="project-link" title="Demo">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Projet 8 -->
-                <div class="project-card fade-in" data-category="nlp dl">
-                    <div class="project-image">
-                        <i class="fas fa-language"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Chatbot Intelligence Artificielle</h3>
-                        <p>Assistant conversationnel avancé utilisant les derniers modèles de language. Interface multimodale avec compréhension du contexte et mémoire à long terme.</p>
-                        <div class="project-tech">
-                            <span>Transformers</span>
-                            <span>Langchain</span>
-                            <span>Vector DB</span>
-                            <span>React</span>
-                            <span>WebSocket</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link" title="GitHub">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="project-link" title="Demo">
-                                <i class="fas fa-external-link-alt"></i>
+                            <a href="#" class="project-link" title="En développement" style="opacity: 0.5; cursor: not-allowed;">
+                                <i class="fas fa-code"></i>
                             </a>
                         </div>
                     </div>
